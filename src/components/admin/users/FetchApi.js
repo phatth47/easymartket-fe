@@ -9,3 +9,21 @@ export const getAllUser = async () => {
     console.log(error);
   }
 };
+
+export const postUser = async ({
+  name,
+  email,
+  password,
+  cPassword,
+  userRole,
+}) => {
+  const data = { name, email, password, cPassword, userRole };
+
+  try {
+    let res = await axios.post(`${apiURL}/api/user/add-user`, data);
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
