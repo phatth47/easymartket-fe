@@ -2,6 +2,7 @@ import * as React from "react";
 function SvgComponent({ width = 24, height = 24, size, ...props }) {
   return (
     <svg
+      className="w-12 h-12 animate-spin text-gray-600"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"

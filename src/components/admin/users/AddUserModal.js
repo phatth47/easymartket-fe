@@ -119,6 +119,8 @@ const AddUserDetail = () => {
               <IcClose />
             </span>
           </div>
+          {uData.error ? alert(uData.error, "red") : ""}
+          {uData.success ? alert(uData.success, "green") : ""}
           <form className="w-full" onSubmit={(e) => submitForm(e)}>
             <div className="flex space-x-1 py-4">
               <div className="w-1/2 flex flex-col space-y-1 space-x-1">

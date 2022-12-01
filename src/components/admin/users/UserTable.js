@@ -10,7 +10,7 @@ const UserTable = () => {
     <div>
       {status === "loading" ? (
         <div className="flex items-center justify-center p-8">
-          <IcLoading className="w-12 h-12 animate-spin text-gray-600" />
+          <IcLoading />
         </div>
       ) : status === "error" ? (
         <span>Error: {error.message}</span>
