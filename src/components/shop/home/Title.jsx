@@ -7,7 +7,7 @@ import React, {
 } from "react";
 
 const Title = (props) => {
-  console.log("props", props);
+  // console.log("props", props);
   return (
     <div class="section-title-container">
       <h4 class="text-lg md:text-xl section-title section-title-normal">

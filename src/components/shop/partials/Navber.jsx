@@ -1,5 +1,6 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { getAllCategory } from "../../admin/categories/FetchApi";
 import "./style.css";
 
 import { logout } from "./Action";
@@ -9,6 +10,22 @@ import { isAdmin } from "../auth/fetchApi";
 const Navber = (props) => {
   const history = useHistory();
   const location = useLocation();
+  const [categories, setCategories] = useState(null);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      let responseData = await getAllCategory();
+      if (responseData && responseData.Categories) {
+        setCategories(responseData.Categories);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const { data, dispatch } = useContext(LayoutContext);
 
@@ -53,7 +70,7 @@ const Navber = (props) => {
               style={{ letterSpacing: "0.10rem" }}
               className="flex items-left text-center font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2 text-center"
             >
-              Hayroo
+              <img src="/logo.webp" alt="logo" />
             </span>
           </div>
           <div
@@ -61,40 +78,28 @@ const Navber = (props) => {
             style={{ letterSpacing: "0.70rem" }}
             className="hidden lg:block flex items-left col-span-1  text-gray-800 font-bold  uppercase text-2xl cursor-pointer"
           >
-            Hayroo
+            <img src="/logo.webp" alt="logo" />
           </div>
 
-          <div className="nav hidden lg:block col-span-2 flex text-gray-600 mt-1">
-            <span
-              className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/")}
-            >
-              Shop
-            </span>
-            <span
-              className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/blog")}
-            >
-              Blog
-            </span>
-            <span
-              className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/contact-us")}
-            >
-              Contact us
-            </span>
-            <span
-              className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/contact-us")}
-            >
-              Contact us
-            </span>
-            <span
-              className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/contact-us")}
-            >
-              Contact us
-            </span>
+          <div className="nav hidden lg:block col-span-2 flex text-gray-600 m-auto">
+            {categories && categories.length > 0 ? (
+              categories.map((item, index) => {
+                return (
+                  <Fragment key={index}>
+                    <span
+                      onClick={(e) =>
+                        history.push(`/products/category/${item._id}`)
+                      }
+                      className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
+                    >
+                      {item.cName}
+                    </span>
+                  </Fragment>
+                );
+              })
+            ) : (
+              <div className="text-xl text-center my-4">No Category</div>
+            )}
           </div>
 
           <div className="flex items-right col-span-2 lg:col-span-1 flex justify-end">
@@ -105,10 +110,11 @@ const Navber = (props) => {
               title="Wishlist"
             >
               <svg
-                className={`${location.pathname === "/wish-list"
-                  ? "fill-current text-gray-800"
-                  : ""
-                  } w-8 h-8 text-gray-600 cursor-pointer`}
+                className={`${
+                  location.pathname === "/wish-list"
+                    ? "fill-current text-gray-800"
+                    : ""
+                } w-8 h-8 text-gray-600 cursor-pointer`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -435,37 +441,25 @@ const Navber = (props) => {
             Hayroo
           </div>
 
-          <div className="nav hidden lg:block col-span-2 flex text-gray-600 mt-1">
-            <span
-              className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/")}
-            >
-              Shop
-            </span>
-            <span
-              className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/blog")}
-            >
-              Blog
-            </span>
-            <span
-              className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/contact-us")}
-            >
-              Contact us
-            </span>
-            <span
-              className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/contact-us")}
-            >
-              Contact us
-            </span>
-            <span
-              className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/contact-us")}
-            >
-              Contact us
-            </span>
+          <div className="nav hidden lg:block col-span-2 flex text-gray-600 m-auto">
+            {categories && categories.length > 0 ? (
+              categories.map((item, index) => {
+                return (
+                  <Fragment key={index}>
+                    <span
+                      onClick={(e) =>
+                        history.push(`/products/category/${item._id}`)
+                      }
+                      className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
+                    >
+                      {item.cName}
+                    </span>
+                  </Fragment>
+                );
+              })
+            ) : (
+              <div className="text-xl text-center my-4">No Category</div>
+            )}
           </div>
 
           <div className="flex items-right col-span-2 lg:col-span-1 flex justify-end">
@@ -476,10 +470,11 @@ const Navber = (props) => {
               title="Wishlist"
             >
               <svg
-                className={`${location.pathname === "/wish-list"
-                  ? "fill-current text-gray-800"
-                  : ""
-                  } w-8 h-8 text-gray-600 cursor-pointer`}
+                className={`${
+                  location.pathname === "/wish-list"
+                    ? "fill-current text-gray-800"
+                    : ""
+                } w-8 h-8 text-gray-600 cursor-pointer`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

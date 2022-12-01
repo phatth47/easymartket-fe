@@ -16,7 +16,7 @@ const Slider = (props) => {
       const heightScreen = window.innerHeight;
       const smooth = e.offsetY
       setValueScroll(smooth / heightScreen * 100)
-      console.log("totalScrollRef.current", e.deltaY, window.pageYOffset)
+      // console.log("totalScrollRef.current", e.deltaY, window.pageYOffset)
 
     };
     if (window.innerWidth > 767) {

@@ -21,7 +21,7 @@ const Brand = (props) => {
   const fetchData = async () => {
     dispatch({ type: "loading", payload: true });
     try {
-      let responseData = await props.getAllProduct();
+      let responseData = await props.getAllProduct;
       setTimeout(() => {
         if (responseData && responseData.Products) {
           dispatch({ type: "setProducts", payload: responseData.Products });
@@ -32,19 +32,36 @@ const Brand = (props) => {
       console.log(error);
     }
   };
+
+  // function importAll(r) {
+  //   let images = {};
+  //   r.keys().map((item, index) => {
+  //     images[item.replace("./", "")] = r(item);
+  //   });
+  //   return images;
+  // }
+
+  // const images = importAll(
+  //   require.context("/images/brand", false, /\.(png|jpe?g|svg]webp)$/)
+  // );
+  // // const images = getImgUrl("brand");
+
+  // console.log("images", images);
+
   return (
     <div className="relative">
-      <div className="w-full list-item-grid">
+      <div className="w-full list-item-grid list-item-brand">
         {products && products.length > 0 ? (
           products.map((item, index) => {
             return (
               <div key={index}>
                 <div className="block-item relative">
-                  <div className="picture_item">
+                  <div className="picture_item  logo-brand m-auto">
                     <img
                       onClick={(e) => history.push(`/products/${item._id}`)}
                       className="object-cover object-center cursor-pointer"
-                      src={`${apiURL}/uploads/products/${item.pImages[0]}`}
+                      // src={`${apiURL}/uploads/products/${item.pImages[0]}`}
+                      src="images/brand/suavecito-logo.webp"
                       alt="product"
                     />
                   </div>

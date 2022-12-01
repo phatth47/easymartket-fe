@@ -70,22 +70,8 @@
   height: 100%;
 }
 
-.parallax_section h2 {
-  width: 60vw;
-  color: #fff;
-  margin: 0;
-  font-size: 5em;
-  z-index: 1;
-  text-align: center;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-60%);
-  line-height: 100px;
-  font-weight: 900;
-  box-sizing: border-box !important;
-  z-index: 1;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+.menu img {
+  max-width: 100px;
 }
 
 .react-parallax-bgimage::after {

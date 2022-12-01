@@ -30,11 +30,11 @@
 /* Slide */
 .parallax_section {
   /* padding: 50px; */
-  height: 80vh;
+  height: 35em;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   /* height: 100%; */
   position: relative;
   overflow: hidden;
@@ -48,7 +48,7 @@
 }
 
 .parallax_section h2 {
-  width: 45vw;
+  width: 10em;
   color: #fff;
   margin: 0;
   font-size: 5em;
@@ -77,8 +77,9 @@
 /* SingelProductV2 */
 .block-item {
   /* width: 20vw; */
-  margin: 0 20px;
-  padding: 0 2%;
+  /* margin-right: 20px;
+  padding-right: 2%; */
+  width: 23%;
 }
 
 .price_before {
@@ -94,14 +95,24 @@
 }
 
 .list-item-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2%;
+  margin: 0;
+  padding: 0;
 }
+
+.list-item-brand {
+  justify-content: center;
+}
+
 
 .picture_item img {
   margin: auto;
   max-height: 250px;
-  height: 60vh;
+
+
 }
 
 .slick-slider {
@@ -110,6 +121,7 @@
 
 .slick-slide {
   float: left;
+  padding-right: 2em;
   /* transform: rotateX(180deg); */
 }
 
@@ -161,7 +173,7 @@
 
 .slick-next,
 .slick-prev {
-  display: "none"
+  display: none !important;
 }
 
 .btn-prev,
@@ -178,7 +190,7 @@
   transform: translateY(-50%);
   cursor: pointer;
   border: none;
-  z-index: 20;
+  z-index: 19;
   color: #000;
 }
 
@@ -215,4 +227,60 @@
   justify-content: left;
   position: relative;
   width: 100%;
+  margin-bottom: 1.5em;
+}
+
+/* Brand */
+.logo-brand {
+  padding: 15px;
+  width: 150px;
+
+}
+
+.logo-brand img {
+  transition: filter .6s, opacity .6s, transform .6s, box-shadow .3s;
+
+  height: 40px;
+}
+
+.logo-brand img:hover {
+  transform: scale(1.1);
+}
+
+/* Service */
+.box-icon {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.box-icon img {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+  max-width: 200px;
+  width: 3em;
+}
+
+.list-service {
+  display: flex;
+  justify-content: space-between;
+  gap: 2%;
+  width: 100%;
+  padding: 1em 0;
+
+}
+
+.box-icon p {
+  padding-left: 1em !important;
+  margin: auto 0 !important;
+}
+
+.info-contact {
+  background-color: #000;
+}
+
+.info-contact p {
+  padding: 2em 0;
+  color: white;
+  text-align: center;
 }
