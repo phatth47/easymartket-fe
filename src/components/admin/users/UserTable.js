@@ -1,10 +1,18 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useEffect, useMemo } from "react";
 import { IcDelete, IcEdit, IcLoading } from "../../../image/ic_svg";
 import moment from "moment";
 import { useUsers } from "./UserQuery";
+import { UserContext } from ".";
 
 const UserTable = () => {
   const { status, data, error } = useUsers();
+  // useEffect(() => {
+  //   refetch();
+  // }, [data, refetch]);
+
+  // const userRes = useMemo(() => {
+  //   return data?.Users || [];
+  // }, [data]);
 
   return (
     <div>
@@ -64,6 +72,15 @@ const UserTableDetail = ({ users }) => {
 };
 
 const UserTableDetailRow = ({ user }) => {
+  const { dispatch } = useContext(UserContext);
+
+  const editProduct = (user) => {
+    dispatch({
+      type: "editUserModalOpen",
+      user: { ...user },
+    });
+  };
+
   return (
     <Fragment>
       <tr>
@@ -78,7 +95,7 @@ const UserTableDetailRow = ({ user }) => {
         </td>
         <td className="p-2 flex items-center justify-center">
           <span
-            onClick={(e) => {}}
+            onClick={(e) => editProduct(user)}
             className="cursor-pointer hover:bg-gray-200 rounded-lg p-2 mx-1"
           >
             <IcEdit />

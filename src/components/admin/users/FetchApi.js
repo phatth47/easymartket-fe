@@ -27,3 +27,15 @@ export const postUser = async ({
     console.log(error);
   }
 };
+
+export const putUser = async (user) => {
+  let data = { uId: user.uId, name: user.name, phone: user.phone };
+  console.log(data);
+  try {
+    let res = await axios.post(`${apiURL}/api/user/edit-user`, data);
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

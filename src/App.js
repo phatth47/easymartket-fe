@@ -1,11 +1,22 @@
 import React, { Fragment, useReducer } from "react";
 import Routes from "./components";
 import { LayoutContext, layoutState, layoutReducer } from "./components/shop";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQueryClient,
+} from "@tanstack/react-query";
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
 function App() {
   const [data, dispatch] = useReducer(layoutReducer, layoutState);
-  const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <Fragment>
@@ -18,3 +29,5 @@ function App() {
 }
 
 export default App;
+
+export { useQueryClient };

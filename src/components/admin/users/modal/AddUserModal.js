@@ -1,7 +1,9 @@
+// import { useQueryClient } from "@tanstack/react-query";
 import { Fragment, useContext, useState } from "react";
-import { IcClose } from "../../../image/ic_svg";
-import { postUser } from "./FetchApi";
-import { UserContext } from "./index";
+import { IcClose } from "../../../../image/ic_svg";
+import { postUser } from "../FetchApi";
+import { UserContext } from "../index";
+import { useUsers } from "../UserQuery";
 
 const AddUserModal = (props) => {
   return (
@@ -15,6 +17,12 @@ export default AddUserModal;
 
 const AddUserDetail = () => {
   const { data, dispatch } = useContext(UserContext);
+
+  const { refetch } = useUsers(false);
+
+  // const queryClient = useQueryClient();
+
+  // const users = queryClient.getQueryData("users");
 
   const alert = (msg, type) => (
     <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
@@ -33,7 +41,6 @@ const AddUserDetail = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     e.target.reset();
-    console.log(uData);
     if (uData.cPassword !== uData.password) {
       return setUdata({
         ...uData,
@@ -53,6 +60,12 @@ const AddUserDetail = () => {
         userRole: uData.userRole,
       });
       if (responseData.success) {
+        refetch();
+        // queryClient.setQueryData("users", {
+        //   ...users,
+        //   Users: [...users.Users, responseData.data],
+        // });
+
         setUdata({
           ...uData,
           name: "",
