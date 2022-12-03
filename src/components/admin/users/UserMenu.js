@@ -1,13 +1,16 @@
-import React, { Fragment, useContext } from "react";
+import * as React from "react";
 import { UserContext } from "./index";
 import { IcAdd } from "../../../image/ic_svg";
 import EditUserModal from "./modal/EditUserModal";
 import AddUserModal from "./modal/AddUserModal";
+import DeleteUserModal from "./modal/DeleteUserModal";
+import Snackbar from "@mui/material/Snackbar";
+import { Alert } from "../../common/alert";
 
 const UserMenu = (props) => {
-  const { dispatch } = useContext(UserContext);
+  const { data, dispatch } = React.useContext(UserContext);
   return (
-    <Fragment>
+    <React.Fragment>
       <div className="col-span-1 flex justify-between items-center">
         <div className="flex items-center">
           <span
@@ -21,8 +24,19 @@ const UserMenu = (props) => {
         </div>
         <AddUserModal />
         <EditUserModal />
+        <DeleteUserModal />
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          open={data.snackbarState.open}
+          autoHideDuration={2000}
+          onClose={(e) => dispatch({ type: "hideSnackbar" })}
+        >
+          <Alert severity="success" sx={{ width: "100%" }}>
+            {data.snackbarState.message}
+          </Alert>
+        </Snackbar>
       </div>
-    </Fragment>
+    </React.Fragment>
   );
 };
 export default UserMenu;

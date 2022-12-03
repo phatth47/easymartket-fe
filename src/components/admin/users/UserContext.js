@@ -6,6 +6,15 @@ export const userState = {
     name: "",
     phone: "",
   },
+  deleteUserModal: {
+    modal: false,
+    uId: "",
+    name: "",
+  },
+  snackbarState: {
+    open: false,
+    message: "",
+  },
 };
 
 export const userReducer = (state, action) => {
@@ -35,6 +44,41 @@ export const userReducer = (state, action) => {
           uId: "",
           name: "",
           phone: "",
+        },
+      };
+    /* Delete a User */
+    case "deleteUserModalOpen":
+      return {
+        ...state,
+        deleteUserModal: {
+          modal: true,
+          uId: action.user._id,
+          name: action.user.name,
+        },
+      };
+    case "deleteUserModalClose":
+      return {
+        ...state,
+        deleteUserModal: {
+          modal: false,
+          uId: "",
+          name: "",
+        },
+      };
+    case "showSnackbar":
+      return {
+        ...state,
+        snackbarState: {
+          open: true,
+          message: action.message,
+        },
+      };
+    case "hideSnackbar":
+      return {
+        ...state,
+        snackbarState: {
+          open: false,
+          message: "",
         },
       };
     default:

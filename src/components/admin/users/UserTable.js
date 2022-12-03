@@ -74,9 +74,16 @@ const UserTableDetail = ({ users }) => {
 const UserTableDetailRow = ({ user }) => {
   const { dispatch } = useContext(UserContext);
 
-  const editProduct = (user) => {
+  const editUser = (user) => {
     dispatch({
       type: "editUserModalOpen",
+      user: { ...user },
+    });
+  };
+
+  const deleteUser = (user) => {
+    dispatch({
+      type: "deleteUserModalOpen",
       user: { ...user },
     });
   };
@@ -95,13 +102,13 @@ const UserTableDetailRow = ({ user }) => {
         </td>
         <td className="p-2 flex items-center justify-center">
           <span
-            onClick={(e) => editProduct(user)}
+            onClick={(e) => editUser(user)}
             className="cursor-pointer hover:bg-gray-200 rounded-lg p-2 mx-1"
           >
             <IcEdit />
           </span>
           <span
-            onClick={(e) => {}}
+            onClick={(e) => deleteUser(user)}
             className="cursor-pointer hover:bg-gray-200 rounded-lg p-2 mx-1"
           >
             <IcDelete />

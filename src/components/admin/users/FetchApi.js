@@ -39,3 +39,14 @@ export const putUser = async (user) => {
     console.log(error);
   }
 };
+
+export const deleteUser = async (user) => {
+  let data = { uId: user.uId };
+  try {
+    let res = await axios.post(`${apiURL}/api/user/delete-user`, data);
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
