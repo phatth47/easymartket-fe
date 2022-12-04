@@ -71,7 +71,7 @@ const DeleteUserModal = (props) => {
         <div className="mt-32 md:mt-0 relative bg-white w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-4 md:px-8">
           <div className="flex items-center justify-between w-full pt-4">
             <span className="text-left font-semibold text-2xl tracking-wider">
-              Delete User
+              Xóa người dùng
             </span>
             {/* Close Modal */}
             <span
@@ -86,7 +86,8 @@ const DeleteUserModal = (props) => {
 
           <div className="w-full">
             <p className="text-black text-xl">
-              Are you sure you want to delete user <b>{deleteUserData.name}</b>?
+              Bạn có muốn xóa tài khoản người dùng <b>{deleteUserData.name}</b>?
+              Sau khi xóa sẽ không thể khôi phục dữ liệu.
             </p>
           </div>
 
@@ -97,7 +98,7 @@ const DeleteUserModal = (props) => {
               className="rounded-full bg-gray-800 text-gray-100 text-lg font-medium py-2"
               onClick={(e) => submitForm(e)}
             >
-              Delete
+              Xác nhận
             </button>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { getAllProduct, deleteProduct } from "./FetchApi";
 import moment from "moment";
 import { ProductContext } from "./index";
 import { IcLoading } from "../../../image/ic_svg";
+import Pagination from "@mui/material/Pagination";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -28,7 +29,7 @@ const AllProduct = (props) => {
         });
         setLoading(false);
       }
-    }, 1000);
+    }, 500);
   };
 
   const deleteProductReq = async (pId) => {
@@ -51,6 +52,13 @@ const AllProduct = (props) => {
     }
   };
 
+  /* This method paginite */
+  const [page, setPage] = useState(1);
+
+  const onChangePage = (e, page) => {
+    setPage(page);
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
@@ -58,6 +66,12 @@ const AllProduct = (props) => {
       </div>
     );
   }
+  const productsPerPage = 10;
+  const totalProducts = (products && products.length) || 0;
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+  const start = (page - 1) * productsPerPage;
+  const end = start + productsPerPage;
+  const renderProducts = (products && products.slice(start, end)) || [];
 
   return (
     <Fragment>
@@ -65,21 +79,20 @@ const AllProduct = (props) => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
-              <th className="px-4 py-2 border">Product</th>
-              <th className="px-4 py-2 border">Description</th>
-              <th className="px-4 py-2 border">Image</th>
-              <th className="px-4 py-2 border">Status</th>
-              <th className="px-4 py-2 border">Stock</th>
-              <th className="px-4 py-2 border">Category</th>
-              <th className="px-4 py-2 border">Offer</th>
-              <th className="px-4 py-2 border">Created at</th>
-              <th className="px-4 py-2 border">Updated at</th>
-              <th className="px-4 py-2 border">Actions</th>
+              <th className="px-4 py-2 border">Sản phẩm</th>
+              <th className="px-4 py-2 border">Mô tả</th>
+              <th className="px-4 py-2 border">Hình ảnh</th>
+              <th className="px-4 py-2 border">Trạng thái</th>
+              <th className="px-4 py-2 border">Tồn kho</th>
+              <th className="px-4 py-2 border">Danh mục</th>
+              <th className="px-4 py-2 border">Khuyến mãi</th>
+              <th className="px-4 py-2 border">Tạo lúc</th>
+              <th className="px-4 py-2 border">Chỉnh sửa/Xóa</th>
             </tr>
           </thead>
           <tbody>
-            {products && products.length > 0 ? (
-              products.map((item, key) => {
+            {renderProducts && renderProducts.length > 0 ? (
+              renderProducts.map((item, key) => {
                 return (
                   <ProductTable
                     product={item}
@@ -103,9 +116,14 @@ const AllProduct = (props) => {
             )}
           </tbody>
         </table>
-        <div className="text-sm text-gray-600 mt-2">
-          Total {products && products.length} product found
-        </div>
+      </div>
+      <div className="col-span-1 flex items-center justify-center pt-8">
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={onChangePage}
+          shape="rounded"
+        />
       </div>
     </Fragment>
   );
@@ -147,9 +165,6 @@ const ProductTable = ({ product, deleteProduct, editProduct }) => {
         <td className="p-2 text-center">{product.pOffer}</td>
         <td className="p-2 text-center">
           {moment(product.createdAt).format("lll")}
-        </td>
-        <td className="p-2 text-center">
-          {moment(product.updatedAt).format("lll")}
         </td>
         <td className="p-2 flex items-center justify-center">
           <span

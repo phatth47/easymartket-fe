@@ -3,6 +3,7 @@ import { IcDelete, IcEdit, IcLoading } from "../../../image/ic_svg";
 import moment from "moment";
 import { useUsers } from "./UserQuery";
 import { UserContext } from ".";
+import Pagination from "@mui/material/Pagination";
 
 const UserTable = () => {
   const { status, data, error } = useUsers();
@@ -10,9 +11,9 @@ const UserTable = () => {
   //   refetch();
   // }, [data, refetch]);
 
-  // const userRes = useMemo(() => {
-  //   return data?.Users || [];
-  // }, [data]);
+  const users = useMemo(() => {
+    return data?.Users || [];
+  }, [data]);
 
   return (
     <div>
@@ -24,7 +25,7 @@ const UserTable = () => {
         <span>Error: {error.message}</span>
       ) : (
         <>
-          <UserTableDetail users={data.Users} />
+          <UserTableDetail users={users} />
         </>
       )}
     </div>
@@ -32,23 +33,36 @@ const UserTable = () => {
 };
 
 const UserTableDetail = ({ users }) => {
+  const [page, setPage] = React.useState(1);
+
+  const onChangePage = (e, page) => {
+    setPage(page);
+  };
+
+  const usersPerPage = 10;
+  const totalUsers = users.length;
+  const totalPages = Math.ceil(totalUsers / usersPerPage);
+  const start = (page - 1) * usersPerPage;
+  const end = start + usersPerPage;
+  const renderUsers = users.slice(start, end);
+
   return (
     <Fragment>
       <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
-              <th className="px-4 py-2 border">Name</th>
+              <th className="px-4 py-2 border">Họ và tên</th>
               <th className="px-4 py-2 border">Email</th>
+              <th className="px-4 py-2 border">Số điện thoại</th>
               <th className="px-4 py-2 border">Role</th>
               <th className="px-4 py-2 border">Created at</th>
-              <th className="px-4 py-2 border">Updated at</th>
-              <th className="px-4 py-2 border">Actions</th>
+              <th className="px-4 py-2 border">Chỉnh sửa/Xóa</th>
             </tr>
           </thead>
           <tbody>
-            {users && users.length > 0 ? (
-              users.map((item, key) => {
+            {renderUsers && renderUsers.length > 0 ? (
+              renderUsers.map((item, key) => {
                 return <UserTableDetailRow user={item} key={key} />;
               })
             ) : (
@@ -63,9 +77,14 @@ const UserTableDetail = ({ users }) => {
             )}
           </tbody>
         </table>
-        <div className="text-sm text-gray-600 mt-2">
-          Total {users && users.length} users found
-        </div>
+      </div>
+      <div className="col-span-1 flex items-center justify-center pt-8">
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={onChangePage}
+          shape="rounded"
+        />
       </div>
     </Fragment>
   );
@@ -93,12 +112,10 @@ const UserTableDetailRow = ({ user }) => {
       <tr>
         <td className="p-2 text-left">{user.name}</td>
         <td className="p-2 text-left">{user.email}</td>
+        <td className="p-2 text-center">{user.phoneNumber}</td>
         <td className="p-2 text-center">{user.userRole}</td>
         <td className="p-2 text-center">
           {moment(user.createdAt).format("lll")}
-        </td>
-        <td className="p-2 text-center">
-          {moment(user.updatedAt).format("lll")}
         </td>
         <td className="p-2 flex items-center justify-center">
           <span

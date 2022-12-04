@@ -19,7 +19,7 @@ const UserMenu = (props) => {
             className="rounded-full cursor-pointer p-2 bg-gray-800 flex items-center text-gray-100 text-sm font-semibold uppercase"
           >
             <IcAdd />
-            Add User
+            Thêm người dùng
           </span>
         </div>
         <AddUserModal />

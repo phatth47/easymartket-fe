@@ -13,11 +13,12 @@ export const getAllUser = async () => {
 export const postUser = async ({
   name,
   email,
+  phone,
   password,
   cPassword,
   userRole,
 }) => {
-  const data = { name, email, password, cPassword, userRole };
+  const data = { name, email, phone, password, cPassword, userRole };
 
   try {
     let res = await axios.post(`${apiURL}/api/user/add-user`, data);

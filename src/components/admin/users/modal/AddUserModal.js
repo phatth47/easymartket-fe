@@ -31,6 +31,7 @@ const AddUserDetail = () => {
   const [uData, setUdata] = useState({
     name: "",
     email: "",
+    phone: "",
     password: "",
     cPassword: "",
     userRole: 0,
@@ -55,6 +56,7 @@ const AddUserDetail = () => {
       let responseData = await postUser({
         name: uData.name,
         email: uData.email,
+        phone: uData.phone,
         password: uData.password,
         cPassword: uData.cPassword,
         userRole: uData.userRole,
@@ -70,29 +72,15 @@ const AddUserDetail = () => {
           ...uData,
           name: "",
           email: "",
+          phone: "",
           password: "",
           cPassword: "",
           userRole: 0,
           success: responseData.success,
           error: false,
         });
-        setTimeout(() => {
-          setUdata({
-            ...uData,
-            name: "",
-            email: "",
-            password: "",
-            cPassword: "",
-            userRole: 0,
-            success: false,
-            error: false,
-          });
-        }, 2000);
       } else if (responseData.error) {
         setUdata({ ...uData, success: false, error: responseData.error });
-        setTimeout(() => {
-          return setUdata({ ...uData, error: false, success: false });
-        }, 2000);
       }
     } catch (error) {
       console.log(error);
@@ -119,7 +107,7 @@ const AddUserDetail = () => {
         <div className="mt-32 md:mt-0 relative bg-white w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-4 md:px-8">
           <div className="flex items-center justify-between w-full pt-4">
             <span className="text-left font-semibold text-2xl tracking-wider">
-              Add User
+              Thêm người dùng
             </span>
             {/* Close Modal */}
             <span
@@ -137,7 +125,7 @@ const AddUserDetail = () => {
           <form className="w-full" onSubmit={(e) => submitForm(e)}>
             <div className="flex space-x-1 py-4">
               <div className="w-1/2 flex flex-col space-y-1 space-x-1">
-                <label htmlFor="name">Full Name *</label>
+                <label htmlFor="name">Họ và tên *</label>
                 <input
                   value={uData.name}
                   onChange={(e) =>
@@ -171,49 +159,7 @@ const AddUserDetail = () => {
             </div>
             <div className="flex space-x-1 py-4">
               <div className="w-1/2 flex flex-col space-y-1 space-x-1">
-                <label htmlFor="name">Password *</label>
-                <input
-                  onChange={(e) =>
-                    setUdata({
-                      ...uData,
-                      error: false,
-                      success: false,
-                      password: e.target.value,
-                    })
-                  }
-                  value={uData.password}
-                  type="password"
-                  id="password"
-                  className={`${
-                    uData.error.password ? "border-red-500" : ""
-                  } px-4 py-2 focus:outline-none border`}
-                />
-                {!data.error ? "" : alert(data.error.password, "red")}
-              </div>
-              <div className="w-1/2 flex flex-col space-y-1 space-x-1">
-                <label htmlFor="name">Confirm Password *</label>
-                <input
-                  onChange={(e) =>
-                    setUdata({
-                      ...uData,
-                      error: false,
-                      success: false,
-                      cPassword: e.target.value,
-                    })
-                  }
-                  value={uData.cPassword}
-                  type="password"
-                  id="cPassword"
-                  className={`${
-                    uData.error.cPassword ? "border-red-500" : ""
-                  } px-4 py-2 focus:outline-none border`}
-                />
-                {!data.error ? "" : alert(data.error.cPassword, "red")}
-              </div>
-            </div>
-            <div className="flex space-x-1 py-4">
-              <div className="w-1/2 flex flex-col space-y-1 space-x-1">
-                <label htmlFor="userRole">User Role *</label>
+                <label htmlFor="userRole">Role *</label>
                 <select
                   value={uData.userRole}
                   onChange={(e) =>
@@ -236,6 +182,64 @@ const AddUserDetail = () => {
                   </option>
                 </select>
               </div>
+              <div className="w-1/2 flex flex-col space-y-1 space-x-1">
+                <label htmlFor="name">Số điện thoại *</label>
+                <input
+                  value={uData.phone}
+                  onChange={(e) =>
+                    setUdata({
+                      ...uData,
+                      error: false,
+                      success: false,
+                      phone: e.target.value,
+                    })
+                  }
+                  className="px-4 py-2 border focus:outline-none"
+                  type="text"
+                />
+              </div>
+            </div>
+            <div className="flex space-x-1 py-4">
+              <div className="w-1/2 flex flex-col space-y-1 space-x-1">
+                <label htmlFor="name">Mật khẩu *</label>
+                <input
+                  onChange={(e) =>
+                    setUdata({
+                      ...uData,
+                      error: false,
+                      success: false,
+                      password: e.target.value,
+                    })
+                  }
+                  value={uData.password}
+                  type="password"
+                  id="password"
+                  className={`${
+                    uData.error.password ? "border-red-500" : ""
+                  } px-4 py-2 focus:outline-none border`}
+                />
+                {!data.error ? "" : alert(data.error.password, "red")}
+              </div>
+              <div className="w-1/2 flex flex-col space-y-1 space-x-1">
+                <label htmlFor="name">Xác nhận mật khẩu *</label>
+                <input
+                  onChange={(e) =>
+                    setUdata({
+                      ...uData,
+                      error: false,
+                      success: false,
+                      cPassword: e.target.value,
+                    })
+                  }
+                  value={uData.cPassword}
+                  type="password"
+                  id="cPassword"
+                  className={`${
+                    uData.error.cPassword ? "border-red-500" : ""
+                  } px-4 py-2 focus:outline-none border`}
+                />
+                {!data.error ? "" : alert(data.error.cPassword, "red")}
+              </div>
             </div>
             <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6 mt-4">
               <button
@@ -243,7 +247,7 @@ const AddUserDetail = () => {
                 type="submit"
                 className="rounded-full bg-gray-800 text-gray-100 text-lg font-medium py-2"
               >
-                Create user
+                Thêm
               </button>
             </div>
           </form>
