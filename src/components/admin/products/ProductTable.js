@@ -32,14 +32,21 @@ const AllProduct = (props) => {
     }, 500);
   };
 
-  const deleteProductReq = async (pId) => {
-    let deleteC = await deleteProduct(pId);
-    if (deleteC.error) {
-      console.log(deleteC.error);
-    } else if (deleteC.success) {
-      console.log(deleteC.success);
-      fetchData();
-    }
+  // const deleteProductReq = async (pId) => {
+  //   let deleteC = await deleteProduct(pId);
+  //   if (deleteC.error) {
+  //     console.log(deleteC.error);
+  //   } else if (deleteC.success) {
+  //     console.log(deleteC.success);
+  //     fetchData();
+  //   }
+  // };
+
+  const deleteProduct = (product) => {
+    dispatch({
+      type: "deleteProductModalOpen",
+      product: { ...product },
+    });
   };
 
   /* This method call the editmodal & dispatch product context */
@@ -99,7 +106,7 @@ const AllProduct = (props) => {
                     editProduct={(pId, product, type) =>
                       editProduct(pId, product, type)
                     }
-                    deleteProduct={(pId) => deleteProductReq(pId)}
+                    deleteProduct={(product) => deleteProduct(product)}
                     key={key}
                   />
                 );
@@ -186,7 +193,7 @@ const ProductTable = ({ product, deleteProduct, editProduct }) => {
             </svg>
           </span>
           <span
-            onClick={(e) => deleteProduct(product._id)}
+            onClick={(e) => deleteProduct(product)}
             className="cursor-pointer hover:bg-gray-200 rounded-lg p-2 mx-1"
           >
             <svg

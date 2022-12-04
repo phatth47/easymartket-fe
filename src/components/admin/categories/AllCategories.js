@@ -28,14 +28,12 @@ const AllCategory = (props) => {
     }, 1000);
   };
 
-  const deleteCategoryReq = async (cId) => {
-    let deleteC = await deleteCategory(cId);
-    if (deleteC.error) {
-      console.log(deleteC.error);
-    } else if (deleteC.success) {
-      console.log(deleteC.success);
-      fetchData();
-    }
+  const deleteProduct = (cId, cName) => {
+    dispatch({
+      type: "deleteCategoryModalOpen",
+      cId: cId,
+      cName: cName,
+    });
   };
 
   /* This method call the editmodal & dispatch category context */
@@ -77,13 +75,12 @@ const AllCategory = (props) => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
-              <th className="px-4 py-2 border">Category</th>
-              <th className="px-4 py-2 border">Description</th>
-              <th className="px-4 py-2 border">Image</th>
-              <th className="px-4 py-2 border">Status</th>
-              <th className="px-4 py-2 border">Created at</th>
-              <th className="px-4 py-2 border">Updated at</th>
-              <th className="px-4 py-2 border">Actions</th>
+              <th className="px-4 py-2 border">Danh mục</th>
+              <th className="px-4 py-2 border">Mô tả</th>
+              <th className="px-4 py-2 border">Hình ảnh</th>
+              <th className="px-4 py-2 border">Trạng thái</th>
+              <th className="px-4 py-2 border">Tạo lúc</th>
+              <th className="px-4 py-2 border">Chỉnh sửa/Xóa</th>
             </tr>
           </thead>
           <tbody>
@@ -95,7 +92,7 @@ const AllCategory = (props) => {
                     editCat={(cId, type, des, status) =>
                       editCategory(cId, type, des, status)
                     }
-                    deleteCat={(cId) => deleteCategoryReq(cId)}
+                    deleteCat={(cId, cName) => deleteProduct(cId, cName)}
                     key={key}
                   />
                 );
@@ -112,9 +109,6 @@ const AllCategory = (props) => {
             )}
           </tbody>
         </table>
-        <div className="text-sm text-gray-600 mt-2">
-          Total {categories && categories.length} category found
-        </div>
       </div>
     </Fragment>
   );
@@ -156,9 +150,6 @@ const CategoryTable = ({ category, deleteCat, editCat }) => {
         <td className="p-2 text-center">
           {moment(category.createdAt).format("lll")}
         </td>
-        <td className="p-2 text-center">
-          {moment(category.updatedAt).format("lll")}
-        </td>
         <td className="p-2 flex items-center justify-center">
           <span
             onClick={(e) =>
@@ -186,7 +177,7 @@ const CategoryTable = ({ category, deleteCat, editCat }) => {
             </svg>
           </span>
           <span
-            onClick={(e) => deleteCat(category._id)}
+            onClick={(e) => deleteCat(category._id, category.cName)}
             className="cursor-pointer hover:bg-gray-200 rounded-lg p-2 mx-1"
           >
             <svg

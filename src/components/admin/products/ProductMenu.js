@@ -2,9 +2,12 @@ import React, { Fragment, useContext } from "react";
 import { ProductContext } from "./index";
 import AddProductModal from "./AddProductModal";
 import EditProductModal from "./EditProductModal";
+import DeleteProductModal from "./DeleteProductModal";
+import Snackbar from "@mui/material/Snackbar";
+import { Alert } from "../../common/alert";
 
 const ProductMenu = (props) => {
-  const { dispatch } = useContext(ProductContext);
+  const { data, dispatch } = useContext(ProductContext);
   return (
     <Fragment>
       <div className="col-span-1 flex justify-between items-center">
@@ -34,6 +37,17 @@ const ProductMenu = (props) => {
         </div>
         <AddProductModal />
         <EditProductModal />
+        <DeleteProductModal />
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          open={data.snackbarState.open}
+          autoHideDuration={2000}
+          onClose={(e) => dispatch({ type: "hideSnackbar" })}
+        >
+          <Alert severity="success" sx={{ width: "100%" }}>
+            {data.snackbarState.message}
+          </Alert>
+        </Snackbar>
       </div>
     </Fragment>
   );

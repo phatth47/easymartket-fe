@@ -8,6 +8,15 @@ export const categoryState = {
     status: "",
   },
   loading: false,
+  deleteCategoryModal: {
+    modal: false,
+    cId: "",
+    cName: "",
+  },
+  snackbarState: {
+    open: false,
+    message: "",
+  },
 };
 
 export const categoryReducer = (state, action) => {
@@ -49,6 +58,41 @@ export const categoryReducer = (state, action) => {
       return {
         ...state,
         loading: action.payload,
+      };
+    /* Delete a Category */
+    case "deleteCategoryModalOpen":
+      return {
+        ...state,
+        deleteCategoryModal: {
+          modal: true,
+          cId: action.cId,
+          cName: action.cName,
+        },
+      };
+    case "deleteCategoryModalClose":
+      return {
+        ...state,
+        deleteCategoryModal: {
+          modal: false,
+          cId: "",
+          cName: "",
+        },
+      };
+    case "showSnackbar":
+      return {
+        ...state,
+        snackbarState: {
+          open: true,
+          message: action.message,
+        },
+      };
+    case "hideSnackbar":
+      return {
+        ...state,
+        snackbarState: {
+          open: false,
+          message: "",
+        },
       };
     default:
       return state;

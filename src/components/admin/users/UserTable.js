@@ -56,7 +56,7 @@ const UserTableDetail = ({ users }) => {
               <th className="px-4 py-2 border">Email</th>
               <th className="px-4 py-2 border">Số điện thoại</th>
               <th className="px-4 py-2 border">Role</th>
-              <th className="px-4 py-2 border">Created at</th>
+              <th className="px-4 py-2 border">Tạo lúc</th>
               <th className="px-4 py-2 border">Chỉnh sửa/Xóa</th>
             </tr>
           </thead>
