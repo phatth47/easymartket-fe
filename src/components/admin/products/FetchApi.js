@@ -9,6 +9,24 @@ export const getAllProduct = async () => {
     console.log(error);
   }
 };
+export const getPromotedProducts = async () => {
+  try {
+    let res = await axios.get(`${apiURL}/api/product/get-promoted-products`);
+    // console.log("getPromotedProducts", res)
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getBestProducts = async () => {
+  try {
+    let res = await axios.get(`${apiURL}/api/product/get-best-selling-products`);
+    // console.log("getBestProducts", res)
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const createPorductImage = async ({ pImage }) => {
   /* Most important part for uploading multiple image  */

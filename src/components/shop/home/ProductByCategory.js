@@ -1,6 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
+import ProductCategoryDropdown from "./ProductCategoryDropdown";
+
 import { useHistory, useParams } from "react-router-dom";
 import Layout from "../layout";
+
 import { productByCategory } from "../../admin/products/FetchApi";
 
 const apiURL = process.env.REACT_APP_API_URL;
@@ -51,6 +54,10 @@ const AllProduct = ({ products }) => {
   return (
     <Fragment>
       <Submenu category={category} />
+      {/* Category, Search & Filter Section */}
+      {/* <section className="container  m-4 md:mx-auto md:my-5"> */}
+      {/* <ProductCategoryDropdown /> */}
+      {/* </section> */}
       <section className="m-4 md:mx-8 md:my-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products && products.length > 0 ? (
           products.map((item, index) => {
@@ -127,7 +134,7 @@ const PageComponent = () => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [catId]);
 
   const fetchData = async () => {
     try {

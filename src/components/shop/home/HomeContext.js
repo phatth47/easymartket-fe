@@ -3,6 +3,8 @@ export const homeState = {
   filterListDropdown: false,
   searchDropdown: false,
   products: null,
+  productPromoted: [],
+  productBestProduct: [],
   loading: false,
   sliderImages: [],
 };
@@ -31,6 +33,16 @@ export const homeReducer = (state, action) => {
         searchDropdown: action.payload,
       };
     case "setProducts":
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case "setPromotedProducts":
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case "setBestProducts":
       return {
         ...state,
         products: action.payload,

@@ -12,20 +12,20 @@ const Slider = (props) => {
   const [getValueScroll, setValueScroll] = useState();
   useEffect(() => {
     sliderImages(dispatch);
-    const mouseWheelHandler = (e) => {
-      const heightScreen = window.innerHeight;
-      const smooth = e.offsetY
-      setValueScroll(smooth / heightScreen * 100)
-      // console.log("totalScrollRef.current", e.deltaY, window.pageYOffset)
+    // const mouseWheelHandler = (e) => {
+    //   const heightScreen = window.innerHeight;
+    //   const smooth = e.offsetY
+    //   setValueScroll(smooth / heightScreen * 100)
+    //   // console.log("totalScrollRef.current", e.deltaY, window.pageYOffset)
 
-    };
-    if (window.innerWidth > 767) {
-      window.addEventListener("mousewheel", mouseWheelHandler);
+    // };
+    // if (window.innerWidth > 767) {
+    //   window.addEventListener("mousewheel", mouseWheelHandler);
 
-      return () => {
-        window.removeEventListener("mousewheel", mouseWheelHandler);
-      };
-    }
+    //   return () => {
+    //     window.removeEventListener("mousewheel", mouseWheelHandler);
+    //   };
+    // }
 
   }, []);
 

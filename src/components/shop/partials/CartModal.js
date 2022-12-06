@@ -57,15 +57,13 @@ const CartModal = () => {
     <Fragment>
       {/* Black Overlay */}
       <div
-        className={`${
-          !data.cartModal ? "hidden" : ""
-        } fixed top-0 z-30 w-full h-full bg-black opacity-50`}
+        className={`${!data.cartModal ? "hidden" : ""
+          } fixed top-0 z-30 w-full h-full bg-black opacity-50`}
       />
       {/* Cart Modal Start */}
       <section
-        className={`${
-          !data.cartModal ? "hidden" : ""
-        } fixed z-40 inset-0 flex items-start justify-end`}
+        className={`${!data.cartModal ? "hidden" : ""
+          } fixed z-40 inset-0 flex items-start justify-end`}
       >
         <div
           style={{ background: "#303031" }}
@@ -73,7 +71,10 @@ const CartModal = () => {
         >
           <div className="overflow-y-auto">
             <div className="border-b border-gray-700 flex justify-between">
-              <div className="p-4 text-white text-lg font-semibold">Cart</div>
+              <div className="p-4 text-white text-lg font-semibold">
+                {/* Cart */}
+                Giỏ hàng
+              </div>
               {/* Cart Modal Close Button */}
               <div className="p-4 text-white">
                 <svg
@@ -109,7 +110,8 @@ const CartModal = () => {
                           <div className="flex items-center justify-between">
                             <div className="flex items-center justify-between space-x-2">
                               <div className="text-sm text-gray-400">
-                                Quantity :
+                                {/* Quantity : */}
+                                Số lượng :
                               </div>
                               <div className="flex items-end">
                                 <span className="text-sm text-gray-200">
@@ -120,9 +122,10 @@ const CartModal = () => {
                             <div>
                               {" "}
                               <span className="text-sm text-gray-400">
-                                Subtotoal :
+                                {/* Subtotoal :  */}
+                                Tổng :
                               </span>{" "}
-                              ${subTotal(item._id, item.pPrice)}.00
+                              {subTotal(item._id, item.pPrice)}đ
                             </div>{" "}
                             {/* SUbtotal Count */}
                           </div>
@@ -153,7 +156,8 @@ const CartModal = () => {
 
               {products === null && (
                 <div className="m-4 flex-col text-white text-xl text-center">
-                  No product in cart
+                  {/* No product in cart */}
+                  Không có sản phẩm trong giỏ hàng
                 </div>
               )}
             </div>
@@ -163,7 +167,8 @@ const CartModal = () => {
               onClick={(e) => cartModalOpen()}
               className="cursor-pointer px-4 py-2 border border-gray-400 text-white text-center cursor-pointer"
             >
-              Continue shopping
+              {/* Continue shopping */}
+              Tiếp tục mua sắm
             </div>
             {data.cartTotalCost ? (
               <Fragment>
@@ -175,7 +180,8 @@ const CartModal = () => {
                       cartModalOpen();
                     }}
                   >
-                    Checkout ${data.cartTotalCost}.00
+                    {/* Checkout ${data.cartTotalCost}.00 */}
+                    Thanh toán ${data.cartTotalCost}.00
                   </div>
                 ) : (
                   <div
@@ -193,13 +199,15 @@ const CartModal = () => {
                       });
                     }}
                   >
-                    Checkout ${data.cartTotalCost}.00
+                    {/* Checkout ${data.cartTotalCost}.00 */}
+                    Thanh toán ${data.cartTotalCost}.00
                   </div>
                 )}
               </Fragment>
             ) : (
               <div className="px-4 py-2 bg-black text-white text-center cursor-not-allowed">
-                Checkout
+                {/* Checkout */}
+                Thanh toán
               </div>
             )}
           </div>

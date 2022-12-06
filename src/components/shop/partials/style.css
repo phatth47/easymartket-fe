@@ -51,27 +51,9 @@
   /* transform: perspective(1px); */
 }
 
-.parallax_section {
-  /* padding: 50px; */
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  /* height: 100%; */
-  position: relative;
-  overflow: hidden;
-  /* overflow: auto; */
-  transform-style: preserve-3d;
-  /* perspective: 1px; */
-}
-
-.parallax_bg {
-  height: 100%;
-}
 
 .menu img {
-  max-width: 100px;
+  max-width: 150px;
 }
 
 .react-parallax-bgimage::after {
@@ -81,4 +63,108 @@
   position: absolute;
   display: block;
   background-color: rgba(10, 4, 4, 0.2);
+}
+
+/* Footer */
+.box-footer {
+  display: block;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5%;
+  width: 100%;
+  padding: 1em 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.box-footer>div:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+.logo-box p {
+  /* text-align: left; */
+  margin-top: 1em;
+}
+
+.social-chanel {
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+  gap: 4%;
+}
+
+.icon-footer {
+  display: table-cell !important;
+  vertical-align: middle !important;
+  color: white;
+  width: 40px !important;
+  height: 40px !important;
+  font-size: 1.2em;
+  border-radius: 999px;
+  padding: 0.5em;
+  fill: white;
+  transition: .5s;
+}
+
+.icon-footer:hover {
+  transform: scale(1.1);
+}
+
+.icon-footer svg {
+  width: 0.7em;
+  margin: 0 auto;
+  padding-top: 2px;
+}
+
+.icon-mail svg {
+  width: 0.8em;
+}
+
+.icon-fb {
+  background: #3a589d !important;
+}
+
+.icon-fb:hover {
+  background: #22345e !important;
+}
+
+.icon-ins {
+  background: #3b6994 !important;
+}
+
+.icon-ins:hover {
+  background: #1c3247 !important;
+}
+
+.icon-tiktok {
+  background: #111 !important;
+}
+
+.icon-mail {
+  background: #111 !important;
+}
+
+.contact p {
+  /* text-align: left; */
+  margin-bottom: 10px;
+}
+
+/* Header */
+.nav-header {
+  transition: opacity 0.5s;
+}
+
+.menu-icon svg {
+  color: #411917 !important;
+}
+
+@media (min-width: 1024px) {
+  .box-footer {
+    display: grid;
+    text-align: left;
+  }
+
+  .box-footer>div:not(:last-child) {
+    margin-bottom: 0;
+  }
+
 }

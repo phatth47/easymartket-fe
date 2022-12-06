@@ -7,88 +7,85 @@ import React, {
 } from "react";
 import { useHistory } from "react-router-dom";
 // import { getAllProduct } from "../../admin/products/FetchApi";
-import { HomeContext } from "./";
+import { HomeContext } from ".";
 import { isWishReq, unWishReq, isWish } from "./Mixins";
 import Slider from "react-slick";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
-const SlideProduct = (props) => {
-  const { data, dispatch } = useContext(HomeContext);
-  const { products } = data;
+const ListProduct = ({ data, styleShow }) => {
+  // const { data, dispatch } = useContext(HomeContext);
+  // const { products } = data;
   const history = useHistory();
   const slider = useRef();
   /* WhisList State */
   const [wList, setWlist] = useState(
     JSON.parse(localStorage.getItem("wishList"))
   );
-  useEffect(() => {
-    fetchData();
-  }, []);
-  const fetchData = async () => {
-    dispatch({ type: "loading", payload: true });
-    try {
-      let responseData = await props.getAllProduct;
-      setTimeout(() => {
-        if (responseData && responseData.Products) {
-          dispatch({ type: "setProducts", payload: responseData.Products });
-          dispatch({ type: "loading", payload: false });
-        }
-      }, 500);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const settings = {
     dots: false,
     className: "slide-product",
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
-    // responsive: [
-    //   {
-    //     breakpoint: 1024,
-    //     settings: {
-    //       slidesToShow: 3,
-    //       slidesToScroll: 3,
-    //       infinite: true,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 600,
-    //     settings: {
-    //       slidesToShow: 2,
-    //       slidesToScroll: 2,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 480,
-    //     settings: {
-    //       infinite: true,
-    //       speed: 400,
-    //       slidesToShow: 1,
-    //       slidesToScroll: 1,
-    //       autoplay: true,
-    //       autoplaySpeed: 4000,
-    //       pauseOnHover: true,
-    //     },
-    //   },
-    // ],
+    autoplay: true,
+    autoplaySpeed: 4000,
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          // dots: true,
+          infinite: true,
+          speed: 400,
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 4000,
+          pauseOnHover: true,
+        },
+      },
+      {
+        breakpoint: 580,
+        settings: {
+          dots: true,
+          infinite: true,
+          speed: 400,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 4000,
+          pauseOnHover: true,
+        },
+      },
+    ],
   };
 
   return (
     <div className="relative">
-      {props.styleShow == "slide" ? (
+      {styleShow == "slide" ? (
         <>
           <Slider ref={slider} {...settings} className="w-full list-item">
-            {products && products.length > 0 ? (
-              products.map((item, index) => {
+            {data && data.length > 0 ? (
+              data.map((item, index) => {
                 return (
                   <div key={index} className="block-item relative">
-                    <div className="promotion absolute">-{item.pOffer}%</div>
+                    {item.pOffer > 0 ? (
+                      <div className="promotion absolute">-{item.pOffer}%</div>
+                    ) : (
+                      ""
+                    )}
                     <div className="picture_item">
                       <img
                         onClick={(e) => history.push(`/products/${item._id}`)}
@@ -99,17 +96,20 @@ const SlideProduct = (props) => {
                     </div>
                     <div className="name_item">{item.pName}</div>
                     <div className="price_item">
-                      {item.pOffer ? (
-                        <div className="price_before">
-                          {(item.pPrice * (1 + item.pOffer / 100)).toFixed(2)} đ
-                        </div>
+                      {item.pOffer > 0 ? (
+                        <>
+                          <div className="price_before">{item.pPrice} đ</div>
+                          <div className="price_after">
+                            {(
+                              (item.pPrice * (100 - item.pOffer)) /
+                              100
+                            ).toFixed(0)}{" "}
+                            đ
+                          </div>
+                        </>
                       ) : (
-                        ""
+                        <div className="price_current"> {item.pPrice} đ</div>
                       )}
-
-                      <div className="price_after">
-                        <span>{item.pPrice} đ</span>
-                      </div>
                     </div>
                     {/* WhisList Logic  */}
                     <div className="absolute top-0 right-0 mx-2 my-2 md:mx-4">
@@ -175,11 +175,16 @@ const SlideProduct = (props) => {
         </>
       ) : (
         <div className="w-full list-item-grid">
-          {products && products.length > 0 ? (
-            products.map((item, index) => {
+          {data && data.length > 0 ? (
+            data.map((item, index) => {
               return (
                 <div className="block-item relative">
-                  <div className="promotion absolute">-{item.pOffer}%</div>
+                  {item.pOffer > 0 ? (
+                    <div className="promotion absolute">-{item.pOffer}%</div>
+                  ) : (
+                    ""
+                  )}
+                  {/* <div className="promotion absolute">-{item.pOffer}%</div> */}
                   <div className="picture_item">
                     <img
                       onClick={(e) => history.push(`/products/${item._id}`)}
@@ -191,15 +196,18 @@ const SlideProduct = (props) => {
                   <div className="name_item">{item.pName}</div>
                   <div className="price_item">
                     {item.pOffer > 0 ? (
-                      <div className="price_before">
-                        {(item.pPrice * (1 + item.pOffer / 100)).toFixed(2)} đ
-                      </div>
+                      <>
+                        <div className="price_before">{item.pPrice} đ</div>
+                        <div className="price_after">
+                          {((item.pPrice * (100 - item.pOffer)) / 100).toFixed(
+                            0
+                          )}{" "}
+                          đ
+                        </div>
+                      </>
                     ) : (
-                      ""
+                      <div className="price_current"> {item.pPrice} đ</div>
                     )}
-                    <div className="price_after">
-                      <span>{item.pPrice} đ</span>
-                    </div>
                   </div>
 
                   {/* WhisList Logic  */}
@@ -252,4 +260,4 @@ const SlideProduct = (props) => {
   );
 };
 
-export default SlideProduct;
+export default ListProduct;

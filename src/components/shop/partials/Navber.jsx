@@ -11,12 +11,35 @@ const Navber = (props) => {
   const history = useHistory();
   const location = useLocation();
   const [categories, setCategories] = useState(null);
+  const [styleMenu, setStyleMenu] = useState("none");
 
   useEffect(() => {
     fetchData();
+
+    const mouseWheelHandler = (e) => {
+      // if (window.pageYOffset > 50) {
+      //   setStyleMenu("fixed");
+      // } else setStyleMenu("");
+      window.pageYOffset > 140 ? setStyleMenu("fixed") : setStyleMenu("");
+
+      console.log(
+        "totalScrollRef.current",
+        e.deltaY,
+        window.pageYOffset,
+        styleMenu
+      );
+    };
+    if (window.innerWidth > 0) {
+      window.addEventListener("mousewheel", mouseWheelHandler);
+
+      return () => {
+        window.removeEventListener("mousewheel", mouseWheelHandler);
+      };
+    }
   }, []);
 
   const fetchData = async () => {
+    // item ? history.push(`/products/category/${item._id}`) : "";
     try {
       let responseData = await getAllCategory();
       if (responseData && responseData.Categories) {
@@ -47,8 +70,8 @@ const Navber = (props) => {
   return (
     <Fragment>
       {/* Navber Section */}
-      <nav className="fixed top-0 w-full z-20 shadow-lg lg:shadow-none bg-white">
-        <div className="menu m-4 md:mx-12 md:my-6 grid grid-cols-4 lg:grid-cols-4">
+      <nav className={` top-0 w-full z-20 shadow-lg lg:shadow-none bg-white`}>
+        <div className="menu container p-4  grid grid-cols-4 lg:grid-cols-4">
           <div className="col-span-2 lg:hidden flex justify-items-stretch	 items-center">
             <svg
               onClick={(e) => navberToggleOpen()}
@@ -70,7 +93,7 @@ const Navber = (props) => {
               style={{ letterSpacing: "0.10rem" }}
               className="flex items-left text-center font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2 text-center"
             >
-              <img src="/logo.webp" alt="logo" />
+              <img src="/logo.png" alt="logo" />
             </span>
           </div>
           <div
@@ -78,7 +101,7 @@ const Navber = (props) => {
             style={{ letterSpacing: "0.70rem" }}
             className="hidden lg:block flex items-left col-span-1  text-gray-800 font-bold  uppercase text-2xl cursor-pointer"
           >
-            <img src="/logo.webp" alt="logo" />
+            <img src="/logo.png" alt="logo" />
           </div>
 
           <div className="nav hidden lg:block col-span-2 flex text-gray-600 m-auto">
@@ -87,9 +110,9 @@ const Navber = (props) => {
                 return (
                   <Fragment key={index}>
                     <span
-                      onClick={(e) =>
-                        history.push(`/products/category/${item._id}`)
-                      }
+                      onClick={(e) => {
+                        history.push(`/products/category/${item._id}`);
+                      }}
                       className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
                     >
                       {item.cName}
@@ -102,7 +125,7 @@ const Navber = (props) => {
             )}
           </div>
 
-          <div className="flex items-right col-span-2 lg:col-span-1 flex justify-end">
+          <div className="menu-icon flex items-right col-span-2 lg:col-span-1 flex justify-end">
             {/*  WishList Page Button */}
             <div
               onClick={(e) => history.push("/wish-list")}
@@ -385,30 +408,36 @@ const Navber = (props) => {
               : "hidden px-1 pb-2 md:pb-0 md:px-10 lg:hidden"
           }
         >
-          <div className="col-span-1 flex flex-col text-gray-600">
-            <span
-              className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer"
-              onClick={(e) => history.push("/")}
-            >
-              Shop
-            </span>
-            <span
-              className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer"
-              onClick={(e) => history.push("/blog")}
-            >
-              Blog
-            </span>
-            <span
-              className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer"
-              onClick={(e) => history.push("/contact-us")}
-            >
-              Contact us
-            </span>
+          <div className="col-span-1 grid text-gray-600">
+            {categories && categories.length > 0 ? (
+              categories.map((item, index) => {
+                return (
+                  <Fragment key={index}>
+                    <span
+                      onClick={(e) => {
+                        history.push(`/products/category/${item._id}`);
+                      }}
+                      className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
+                    >
+                      {item.cName}
+                    </span>
+                  </Fragment>
+                );
+              })
+            ) : (
+              <div className="text-xl text-center my-4">No Category</div>
+            )}
           </div>
         </div>
       </nav>
-      <nav className=" top-0 w-full z-20 shadow-lg lg:shadow-none bg-white">
-        <div className="menu m-4 md:mx-12 md:my-6 grid grid-cols-4 lg:grid-cols-4">
+      <nav
+        className={`fixed nav-header top-0 w-full z-20 shadow-lg lg:shadow-none bg-white`}
+        style={{
+          opacity: styleMenu == "fixed" ? "1" : "0",
+          visibility: styleMenu == "fixed" ? "visible" : "hidden",
+        }}
+      >
+        <div className="menu container p-4 grid grid-cols-4 lg:grid-cols-4">
           <div className="col-span-2 lg:hidden flex justify-items-stretch	 items-center">
             <svg
               onClick={(e) => navberToggleOpen()}
@@ -430,7 +459,7 @@ const Navber = (props) => {
               style={{ letterSpacing: "0.10rem" }}
               className="flex items-left text-center font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2 text-center"
             >
-              Hayroo
+              <img src="/logo.png" alt="logo" />
             </span>
           </div>
           <div
@@ -438,31 +467,42 @@ const Navber = (props) => {
             style={{ letterSpacing: "0.70rem" }}
             className="hidden lg:block flex items-left col-span-1  text-gray-800 font-bold  uppercase text-2xl cursor-pointer"
           >
-            Hayroo
+            <img src="/logo.png" alt="logo" />
           </div>
 
           <div className="nav hidden lg:block col-span-2 flex text-gray-600 m-auto">
+            {/* <Switch> */}
             {categories && categories.length > 0 ? (
               categories.map((item, index) => {
                 return (
                   <Fragment key={index}>
+                    {/* <Route path={`/products/category/${item._id}`}> */}
                     <span
-                      onClick={(e) =>
-                        history.push(`/products/category/${item._id}`)
+                      onClick={
+                        (e) =>
+                          // {
+                          //   history.push(`/products/category/${item._id}`);
+                          //   fetchData();
+                          // }
+                          (window.location = `/products/category/${item._id}`)
+                        // history.push(`/products/category/${item._id}`)
+                        // history.go(0)
                       }
                       className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
                     >
                       {item.cName}
                     </span>
+                    {/* </Route> */}
                   </Fragment>
                 );
               })
             ) : (
               <div className="text-xl text-center my-4">No Category</div>
             )}
+            {/* </Switch> */}
           </div>
 
-          <div className="flex items-right col-span-2 lg:col-span-1 flex justify-end">
+          <div className="menu-icon flex items-right col-span-2 lg:col-span-1 flex justify-end">
             {/*  WishList Page Button */}
             <div
               onClick={(e) => history.push("/wish-list")}
@@ -745,25 +785,25 @@ const Navber = (props) => {
               : "hidden px-1 pb-2 md:pb-0 md:px-10 lg:hidden"
           }
         >
-          <div className="col-span-1 flex flex-col text-gray-600">
-            <span
-              className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer"
-              onClick={(e) => history.push("/")}
-            >
-              Shop
-            </span>
-            <span
-              className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer"
-              onClick={(e) => history.push("/blog")}
-            >
-              Blog
-            </span>
-            <span
-              className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer"
-              onClick={(e) => history.push("/contact-us")}
-            >
-              Contact us
-            </span>
+          <div className="col-span-1 grid text-gray-600">
+            {categories && categories.length > 0 ? (
+              categories.map((item, index) => {
+                return (
+                  <Fragment key={index}>
+                    <span
+                      onClick={(e) => {
+                        history.push(`/products/category/${item._id}`);
+                      }}
+                      className=" mx-4 py-3 rounded-lg font-light  hover:text-gray-800 cursor-pointer"
+                    >
+                      {item.cName}
+                    </span>
+                  </Fragment>
+                );
+              })
+            ) : (
+              <div className="text-xl text-center my-4">No Category</div>
+            )}
           </div>
         </div>
       </nav>

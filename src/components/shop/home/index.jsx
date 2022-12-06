@@ -1,45 +1,95 @@
-import React, { Fragment, createContext, useReducer } from "react";
+import React, {
+  Fragment,
+  createContext,
+  useEffect,
+  useReducer,
+  useState,
+  useContext,
+} from "react";
 import Layout from "../layout";
 import Slider from "./Slider";
 import ProductCategory from "./ProductCategory";
 import { homeState, homeReducer } from "./HomeContext";
 // import SingleProduct from "./SingleProduct";
-import SlideProduct from "./SlideProduct";
+import ListProduct from "./ListProduct";
 import InfoService from "./InfoService";
 import Brand from "./Brand";
 
 import Title from "./Title";
-import { getAllProduct } from "../../admin/products/FetchApi";
+import {
+  getPromotedProducts,
+  getBestProducts,
+} from "../../admin/products/FetchApi";
 
 export const HomeContext = createContext();
 
 const HomeComponent = () => {
+  const [promotedProducts, setPromotedProducts] = useState([]);
+  const [bestProducts, setBestProducts] = useState([]);
+  const { data, dispatch } = useContext(HomeContext);
+
+  useEffect(() => {
+    (async () => {
+      dispatch({ type: "loading", payload: true });
+      try {
+        let responseData = await getPromotedProducts();
+        setTimeout(() => {
+          if (responseData && responseData.Products) {
+            setPromotedProducts(responseData.Products);
+            dispatch({ type: "loading", payload: false });
+          }
+        }, 200);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+
+    (async () => {
+      dispatch({ type: "loading", payload: true });
+      try {
+        let responseData = await getBestProducts();
+        setTimeout(() => {
+          if (responseData && responseData.Products) {
+            setBestProducts(responseData.Products);
+          }
+        }, 200);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        dispatch({ type: "loading", payload: false });
+      }
+    })();
+  }, []);
+
   return (
     <Fragment>
-      <section className="container  m-4 md:mx-auto md:my-4">
+      <section
+        className="container  m-4 md:mx-auto md:my-4"
+        style={{ marginTop: 0 }}
+      >
         <Slider />
       </section>
       {/* Category, Search & Filter Section */}
-      <section className="container  m-4 md:mx-auto md:my-5">
+      {/* <section className="container  m-4 md:mx-auto md:my-5">
         <ProductCategory />
-      </section>
+      </section> */}
       {/* Product Section */}
 
       {/* Khuyến mãi */}
-      <section className="container m-auto m-4 md:mx-auto md:my-5 ">
+      <section className="container m-4 md:mx-auto md:my-5 ">
         <Title name="Khuyến mãi" />
-        <SlideProduct styleShow="slide" />
+        <ListProduct styleShow="slide" data={promotedProducts} />
         {/* <SingleProduct /> */}
       </section>
       {/* Sản phẩm nổi bật */}
       <section className="container m-4 md:mx-auto md:my-5">
         <Title name="Sản phẩm nổi bật" />
-        <SlideProduct styleShow="grid" getAllProduct={getAllProduct()} />
+        <ListProduct styleShow="grid" data={bestProducts} />
       </section>
       {/* Thương hiệu nổi bật */}
       <section className="container m-4 md:mx-auto md:my-5 ">
         <Title name="Thương hiệu nổi bật" />
-        <Brand getAllProduct={getAllProduct()} />
+        <Brand />
       </section>
       {/* Thông tin dịch vụ */}
       <section

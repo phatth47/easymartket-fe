@@ -41,31 +41,35 @@ const AdminNavber = (props) => {
             className="flex items-left text-center font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2 text-center"
           >
             Easymarket
+            {/* <img src="/logo.png" style={{ width: "50%" }} alt="logo" /> */}
           </span>
         </div>
         {/* Small Screen Show */}
         <div className="lg:hidden flex items-center">
-          <svg
-            id="hamburgerBtn"
-            className="lg:hidden w-8 h-8 cursor-pointer text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
+          <div className="md:hidden">
+            <svg
+              id="hamburgerBtn"
+              className="lg:hidden w-8 h-8 cursor-pointer text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </div>
           <span
             onClick={(e) => history.push("/admin/dashboard")}
             style={{ letterSpacing: "0.10rem" }}
-            className="flex items-left text-center font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2 text-center"
+            className="flex justify-center items-left text-center font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2 text-center"
           >
-            Easymarket
+            <img src="/logo.png" style={{ width: "100%", maxWidth: "150px" }} alt="logo" />
+
           </span>
         </div>
         {/* Both Screen show */}
