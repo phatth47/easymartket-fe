@@ -71,7 +71,7 @@ const Navber = (props) => {
     <Fragment>
       {/* Navber Section */}
       <nav className={` top-0 w-full z-20 shadow-lg lg:shadow-none bg-white`}>
-        <div className="menu container p-4  grid grid-cols-4 lg:grid-cols-4">
+        <div className="menu m-auto container p-4  grid grid-cols-4 lg:grid-cols-4">
           <div className="col-span-2 lg:hidden flex justify-items-stretch	 items-center">
             <svg
               onClick={(e) => navberToggleOpen()}
@@ -437,7 +437,7 @@ const Navber = (props) => {
           visibility: styleMenu == "fixed" ? "visible" : "hidden",
         }}
       >
-        <div className="menu container p-4 grid grid-cols-4 lg:grid-cols-4">
+        <div className="menu m-auto container p-4 grid grid-cols-4 lg:grid-cols-4">
           <div className="col-span-2 lg:hidden flex justify-items-stretch	 items-center">
             <svg
               onClick={(e) => navberToggleOpen()}

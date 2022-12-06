@@ -59,7 +59,7 @@ const ListProduct = ({ data, styleShow }) => {
       {
         breakpoint: 580,
         settings: {
-          dots: true,
+          // dots: true,
           infinite: true,
           speed: 400,
           slidesToShow: 1,

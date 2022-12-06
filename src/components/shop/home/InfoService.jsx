@@ -29,8 +29,8 @@ const InfoService = (props) => {
           <p>Sản phẩm chính hãng</p>
         </div>
       </div>
-      <div className="info-contact  md:mx-auto">
-        <p className="container">
+      <div className="info-contact  ">
+        <p className="container m-auto">
           Sự hài lòng của Quý khách là ưu tiên hàng đầu của Easymarket. Hotline:
           <b>0789 355 777</b>
         </p>
