@@ -18,19 +18,17 @@ const Menu = () => {
       <div className="flex flex-col md:flex-row items-center justify-center">
         <div
           onClick={(e) => dispatch({ type: "menu", payload: true })}
-          className={`${
-            data.menu ? "border-b-2 border-yellow-700" : ""
-          } px-4 py-3 cursor-pointer`}
+          className={`${data.menu ? "border-b-2 border-yellow-700" : ""
+            } px-4 py-3 cursor-pointer`}
         >
-          Description
+          Mô tả
         </div>
         <div
           onClick={(e) => dispatch({ type: "menu", payload: false })}
-          className={`${
-            !data.menu ? "border-b-2 border-yellow-700" : ""
-          } px-4 py-3 relative flex cursor-pointer`}
+          className={`${!data.menu ? "border-b-2 border-yellow-700" : ""
+            } px-4 py-3 relative flex cursor-pointer`}
         >
-          <span>Reviews</span>
+          <span>Đánh giá</span>
           <span className="absolute text-xs top-0 right-0 mt-2 bg-yellow-700 text-white rounded px-1">
             {layoutData.singleProductDetail.pRatingsReviews.length}
           </span>
@@ -48,7 +46,8 @@ const RatingReview = () => {
         <ReviewForm />
       ) : (
         <div className="mb-12 md:mx-16 lg:mx-20 xl:mx-24 bg-red-200 px-4 py-2 rounded mb-4">
-          You need to login in for review
+          {/* You need to login in for review */}
+          Bạn cần đăng nhập trước khi đánh giá
         </div>
       )}
     </Fragment>
@@ -80,7 +79,7 @@ const ProductDetailsSectionTwo = (props) => {
       </section>
       <div className="m-4 md:mx-8 md:my-6 flex justify-center capitalize font-light tracking-widest bg-white border-t border-b text-gray-800 px-4 py-4 space-x-4">
         <div>
-          <span>Category :</span>
+          <span>Thể loại :</span>
           <span className="text-sm text-gray-600">
             {" "}
             {singleProduct.pCategory ? singleProduct.pCategory.cName : ""}

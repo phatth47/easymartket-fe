@@ -26,9 +26,10 @@ const Submenu = ({ category }) => {
             >
               Trang chủ
             </span>
+            <span>/</span>
             <span className="text-yellow-700 cursor-default">{category}</span>
           </div>
-          <div>
+          {/* <div>
             <svg
               className="w-3 h-3"
               fill="none"
@@ -43,7 +44,7 @@ const Submenu = ({ category }) => {
                 d="M13 5l7 7-7 7M5 5l7 7-7 7"
               />
             </svg>
-          </div>
+          </div> */}
         </div>
       </section>
       {/* Submenu Section */}
@@ -72,6 +73,7 @@ const AllProduct = ({ products }) => {
 const PageComponent = () => {
   const [products, setProducts] = useState(null);
   const { catId } = useParams();
+  // console.log("catId", catId);
 
   useEffect(() => {
     fetchData();

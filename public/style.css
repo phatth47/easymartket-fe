@@ -640,7 +640,7 @@ video {
   }
 
   .list-item-grid {
-    justify-content: left !important;
+    justify-content: left;
   }
 }
 

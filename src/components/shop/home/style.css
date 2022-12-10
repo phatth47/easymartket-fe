@@ -141,8 +141,16 @@
 }
 
 .list-item-brand {
-  justify-content: center;
+  justify-content: center !important;
 }
+
+@media (min-width: 640px) {
+  .list-item-grid {
+    justify-content: left;
+  }
+}
+
+
 
 
 .picture_item img {
