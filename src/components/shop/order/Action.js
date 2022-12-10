@@ -45,52 +45,79 @@ export const pay = async (
   } else if (!state.phone) {
     setState({ ...state, error: "Please provide your phone number" });
   } else {
-    let nonce;
-    state.instance
-      .requestPaymentMethod()
-      .then((data) => {
-        dispatch({ type: "loading", payload: true });
-        nonce = data.nonce;
-        let paymentData = {
-          amountTotal: totalCost(),
-          paymentMethod: nonce,
-        };
-        getPaymentProcess(paymentData)
-          .then(async (res) => {
-            if (res) {
-              let orderData = {
-                allProduct: JSON.parse(localStorage.getItem("cart")),
-                user: JSON.parse(localStorage.getItem("jwt")).user._id,
-                amount: res.transaction.amount,
-                transactionId: res.transaction.id,
-                address: state.address,
-                phone: state.phone,
-              };
-              try {
-                let resposeData = await createOrder(orderData);
-                if (resposeData.success) {
-                  localStorage.setItem("cart", JSON.stringify([]));
-                  dispatch({ type: "cartProduct", payload: null });
-                  dispatch({ type: "cartTotalCost", payload: null });
-                  dispatch({ type: "orderSuccess", payload: true });
-                  setState({ clientToken: "", instance: {} });
-                  dispatch({ type: "loading", payload: false });
-                  return history.push("/");
-                } else if (resposeData.error) {
-                  console.log(resposeData.error);
-                }
-              } catch (error) {
-                console.log(error);
-              }
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-        setState({ ...state, error: error.message });
-      });
+    // let nonce;
+    // state.instance
+    //   .requestPaymentMethod()
+    //   .then((data) => {
+    //     dispatch({ type: "loading", payload: true });
+    //     nonce = data.nonce;
+    //     let paymentData = {
+    //       amountTotal: totalCost(),
+    //       paymentMethod: nonce,
+    //     };
+    //     getPaymentProcess(paymentData)
+    //       .then(async (res) => {
+    //         if (res) {
+    //           let orderData = {
+    //             allProduct: JSON.parse(localStorage.getItem("cart")),
+    //             user: JSON.parse(localStorage.getItem("jwt")).user._id,
+    //             amount: res.transaction.amount,
+    //             transactionId: res.transaction.id,
+    //             address: state.address,
+    //             phone: state.phone,
+    //           };
+    //           try {
+    //             let resposeData = await createOrder(orderData);
+    //             if (resposeData.success) {
+    //               localStorage.setItem("cart", JSON.stringify([]));
+    //               dispatch({ type: "cartProduct", payload: null });
+    //               dispatch({ type: "cartTotalCost", payload: null });
+    //               dispatch({ type: "orderSuccess", payload: true });
+    //               setState({ clientToken: "", instance: {} });
+    //               dispatch({ type: "loading", payload: false });
+    //               return history.push("/");
+    //             } else if (resposeData.error) {
+    //               console.log(resposeData.error);
+    //             }
+    //           } catch (error) {
+    //             console.log(error);
+    //           }
+    //         }
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setState({ ...state, error: error.message });
+    //   });
+
+    dispatch({ type: "loading", payload: true });
+    let amountTotal = totalCost();
+    let orderData = {
+      allProduct: JSON.parse(localStorage.getItem("cart")),
+      user: JSON.parse(localStorage.getItem("jwt")).user._id,
+      amount: amountTotal,
+      transactionId: "1",
+      address: state.address,
+      phone: state.phone,
+    };
+    try {
+      let resposeData = await createOrder(orderData);
+      if (resposeData.success) {
+        localStorage.setItem("cart", JSON.stringify([]));
+        dispatch({ type: "cartProduct", payload: null });
+        dispatch({ type: "cartTotalCost", payload: null });
+        dispatch({ type: "orderSuccess", payload: true });
+        setState({ clientToken: "", instance: {} });
+        dispatch({ type: "loading", payload: false });
+        return history.push("/");
+      } else if (resposeData.error) {
+        console.log(resposeData.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 };

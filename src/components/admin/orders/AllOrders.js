@@ -41,17 +41,15 @@ const AllCategory = (props) => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
-              <th className="px-4 py-2 border">Products</th>
-              <th className="px-4 py-2 border">Status</th>
-              <th className="px-4 py-2 border">Total</th>
-              <th className="px-4 py-2 border">Transaction Id</th>
-              <th className="px-4 py-2 border">Customer</th>
-              <th className="px-4 py-2 border">Email</th>
-              <th className="px-4 py-2 border">Phone</th>
-              <th className="px-4 py-2 border">Address</th>
-              <th className="px-4 py-2 border">Created at</th>
-              <th className="px-4 py-2 border">Updated at</th>
-              <th className="px-4 py-2 border">Actions</th>
+              {/* <th className="px-4 py-2 border">Mã đơn hàng</th> */}
+              <th className="px-4 py-2 border">Sản phẩm</th>
+              <th className="px-4 py-2 border">Trạng thái</th>
+              <th className="px-4 py-2 border">Tổng tiền</th>
+              <th className="px-4 py-2 border">Khách hàng</th>
+              <th className="px-4 py-2 border">Số điện thoại</th>
+              <th className="px-4 py-2 border">Địa chỉ</th>
+              <th className="px-4 py-2 border">Đặt lúc</th>
+              <th className="px-4 py-2 border">Cập nhật</th>
             </tr>
           </thead>
           <tbody>
@@ -73,15 +71,15 @@ const AllCategory = (props) => {
                   colSpan="12"
                   className="text-xl text-center font-semibold py-8"
                 >
-                  No order found
+                  Không tìm thấy đơn hàng
                 </td>
               </tr>
             )}
           </tbody>
         </table>
-        <div className="text-sm text-gray-600 mt-2">
+        {/* <div className="text-sm text-gray-600 mt-2">
           Total {orders && orders.length} order found
-        </div>
+        </div> */}
       </div>
     </Fragment>
   );
@@ -94,6 +92,9 @@ const CategoryTable = ({ order, editOrder }) => {
   return (
     <Fragment>
       <tr className="border-b">
+        {/* <td className="hover:bg-gray-200 p-2 text-center">
+          {order.transactionId}
+        </td> */}
         <td className="w-48 hover:bg-gray-200 p-2 flex flex-col space-y-1">
           {order.allProduct.map((product, i) => {
             return (
@@ -139,20 +140,11 @@ const CategoryTable = ({ order, editOrder }) => {
         <td className="hover:bg-gray-200 p-2 text-center">
           ${order.amount}.00
         </td>
-        <td className="hover:bg-gray-200 p-2 text-center">
-          {order.transactionId}
-        </td>
         <td className="hover:bg-gray-200 p-2 text-center">{order.user.name}</td>
-        <td className="hover:bg-gray-200 p-2 text-center">
-          {order.user.email}
-        </td>
         <td className="hover:bg-gray-200 p-2 text-center">{order.phone}</td>
         <td className="hover:bg-gray-200 p-2 text-center">{order.address}</td>
         <td className="hover:bg-gray-200 p-2 text-center">
           {moment(order.createdAt).format("lll")}
-        </td>
-        <td className="hover:bg-gray-200 p-2 text-center">
-          {moment(order.updatedAt).format("lll")}
         </td>
         <td className="p-2 flex items-center justify-center">
           <span
@@ -173,7 +165,7 @@ const CategoryTable = ({ order, editOrder }) => {
               />
             </svg>
           </span>
-          <span
+          {/*<span
             onClick={(e) => deleteOrderReq(order._id, dispatch)}
             className="cursor-pointer hover:bg-gray-200 rounded-lg p-2 mx-1"
           >
@@ -191,7 +183,7 @@ const CategoryTable = ({ order, editOrder }) => {
                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
               />
             </svg>
-          </span>
+          </span> */}
         </td>
       </tr>
     </Fragment>

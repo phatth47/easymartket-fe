@@ -32,7 +32,7 @@ const InfoService = (props) => {
       <div className="info-contact  ">
         <p className="container m-auto">
           Sự hài lòng của Quý khách là ưu tiên hàng đầu của Easymarket. Hotline:
-          <b>0789 355 777</b>
+          <b>0123 456 789</b>
         </p>
       </div>
     </>

@@ -1,6 +1,4 @@
 import React, { Fragment } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import moment from "moment";
 import InfoService from "../home/InfoService";
 import "./style.css";
 
@@ -30,8 +28,8 @@ const Footer = (props) => {
               Chúng tôi mong muốn mang đến sự nhanh chóng và tiện lợi tối đa khi
               mua sắm đến cho khách hàng bằng việc đưa hệ thống siêu thị
               Easymarket bằng hình thức mua sắm online trên website
-              Easymarket.com để phục vụ cho mọi đối tượng, đặc biệt là nhóm
-              khách hàng trẻ.
+              Easymarket.vn để phục vụ cho mọi đối tượng, đặc biệt là nhóm khách
+              hàng trẻ.
             </p>
           </div>
           <div className="address-box">
@@ -99,7 +97,7 @@ const Footer = (props) => {
               </a>
             </div>
             <div className="contact">
-              <p>Tư vấn: 0931 255 777 | Hợp tác: 0789 355 777</p>
+              <p>Tư vấn: 0123 456 789 | Hợp tác: 0123 456 789</p>
               <p>
                 Vinhomes Grand Park, Nguyễn Xiển, Long Thạnh Mỹ, Quận 9, Thành
                 phố Hồ Chí Minh

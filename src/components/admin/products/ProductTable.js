@@ -86,7 +86,7 @@ const AllProduct = (props) => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
-              <th className="px-4 py-2 border">Sản phẩm</th>
+              <th className="px-4 py-2 border" style={{width: "15%"}}>Sản phẩm</th>
               <th className="px-4 py-2 border">Mô tả</th>
               <th className="px-4 py-2 border">Hình ảnh</th>
               <th className="px-4 py-2 border">Trạng thái</th>
@@ -142,8 +142,8 @@ const ProductTable = ({ product, deleteProduct, editProduct }) => {
     <Fragment>
       <tr>
         <td className="p-2 text-left">
-          {product.pName.length > 15
-            ? product.pDescription.substring(1, 15) + "..."
+          {product.pName.length > 30
+            ? product.pName.substring(0, 20) + "..."
             : product.pName}
         </td>
         <td className="p-2 text-left">

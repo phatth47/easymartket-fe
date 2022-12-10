@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { IcUser } from "../../../image/ic_svg";
+import { isSuperAdmin } from "../../shop/auth/fetchApi";
 
 const AdminSidebar = (props) => {
   const location = useLocation();
@@ -37,7 +38,7 @@ const AdminSidebar = (props) => {
               />
             </svg>
           </span>
-          <span className="hover:text-gray-800">Dashboard</span>
+          <span className="hover:text-gray-800">Quản lý</span>
         </div>
         <hr className="border-b border-gray-200" />
         <div
@@ -64,7 +65,7 @@ const AdminSidebar = (props) => {
               />
             </svg>
           </span>
-          <span className="hover:text-gray-800">Categories</span>
+          <span className="hover:text-gray-800">Danh mục sản phẩm</span>
         </div>
         <hr className="border-b border-gray-200" />
         <div
@@ -91,7 +92,7 @@ const AdminSidebar = (props) => {
               />
             </svg>
           </span>
-          <span className="hover:text-gray-800">Product</span>
+          <span className="hover:text-gray-800">Sản phẩm</span>
         </div>
         <hr className="border-b border-gray-200" />
         <div
@@ -118,23 +119,27 @@ const AdminSidebar = (props) => {
               />
             </svg>
           </span>
-          <span className="hover:text-gray-800">Order</span>
+          <span className="hover:text-gray-800">Đơn hàng</span>
         </div>
         <hr className="border-b border-gray-200" />
-        <div
-          onClick={(e) => history.push("/admin/dashboard/users")}
-          className={`${
-            location.pathname === "/admin/dashboard/users"
-              ? "border-r-4 border-gray-800 bg-gray-100"
-              : ""
-          } hover:bg-gray-200 cursor-pointer flex flex-col items-center justify-center py-6`}
-        >
-          <span>
-            <IcUser />
-          </span>
-          <span className="hover:text-gray-800">User</span>
-        </div>
-        <hr className="border-b border-gray-200" />
+        {isSuperAdmin() && (
+          <Fragment>
+            <div
+              onClick={(e) => history.push("/admin/dashboard/users")}
+              className={`${
+                location.pathname === "/admin/dashboard/users"
+                  ? "border-r-4 border-gray-800 bg-gray-100"
+                  : ""
+              } hover:bg-gray-200 cursor-pointer flex flex-col items-center justify-center py-6`}
+            >
+              <span>
+                <IcUser />
+              </span>
+              <span className="hover:text-gray-800">Người dùng</span>
+            </div>
+            <hr className="border-b border-gray-200" />
+          </Fragment>
+        )}
       </div>
     </Fragment>
   );
