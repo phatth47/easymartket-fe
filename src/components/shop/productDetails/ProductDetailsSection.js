@@ -8,6 +8,7 @@ import ProductDetailsSectionTwo from "./ProductDetailsSectionTwo";
 import { getSingleProduct } from "./FetchApi";
 import { cartListProduct } from "../partials/FetchApi";
 
+import { getPrice, getDiscountPrice } from "../../common/price";
 import { isWishReq, unWishReq, isWish } from "../home/Mixins";
 import { updateQuantity, slideImage, addToCart, cartList } from "./Mixins";
 import { totalCost } from "../partials/Mixins";
@@ -92,7 +93,7 @@ const ProductDetailsSection = (props) => {
       </div>
     );
   } else if (!sProduct) {
-    return <div>No product</div>;
+    return <div>Không có sản phẩm</div>;
   }
   return (
     <Fragment>
@@ -105,14 +106,14 @@ const ProductDetailsSection = (props) => {
       />
       <section className="m-4 md:mx-12 md:my-6">
         <div className="grid grid-cols-2 md:grid-cols-12">
+          {/* <div className="col-span-2 md:col-span-8"> */}
           <div className="hidden md:block md:col-span-1 md:flex md:flex-col md:space-y-4 md:mr-2">
             <img
               onClick={(e) =>
                 slideImage("increase", 0, count, setCount, pImages)
               }
-              className={`${
-                count === 0 ? "" : "opacity-25"
-              } cursor-pointer w-20 h-20 object-cover object-center`}
+              className={`${count === 0 ? "" : "opacity-25"
+                } cursor-pointer w-20 h-20 object-cover object-center`}
               src={`${apiURL}/uploads/products/${sProduct.pImages[0]}`}
               alt="pic"
             />
@@ -120,14 +121,13 @@ const ProductDetailsSection = (props) => {
               onClick={(e) =>
                 slideImage("increase", 1, count, setCount, pImages)
               }
-              className={`${
-                count === 1 ? "" : "opacity-25"
-              } cursor-pointer w-20 h-20 object-cover object-center`}
+              className={`${count === 1 ? "" : "opacity-25"
+                } cursor-pointer w-20 h-20 object-cover object-center`}
               src={`${apiURL}/uploads/products/${sProduct.pImages[1]}`}
               alt="pic"
             />
           </div>
-          <div className="col-span-2 md:col-span-7">
+          <div className="col-span-2 md:col-span-4">
             <div className="relative">
               <img
                 className="w-full"
@@ -176,15 +176,35 @@ const ProductDetailsSection = (props) => {
             <div className="flex flex-col leading-8">
               <div className="text-2xl tracking-wider">{sProduct.pName}</div>
               <div className="flex justify-between items-center">
-                <span className="text-xl tracking-wider text-yellow-700">
-                  ${sProduct.pPrice}.00
+                <span className="text-xl tracking-wider">
+                  {/* ${sProduct.pPrice}.00 */}
+                  {sProduct.pOffer > 0 ? (
+                    <>
+                      <span className="price_before">
+                        {/* {item.pPrice
+                              .toFixed(0)
+                              .replace(/\d(?=(\d{3})+\.)/g, "$&,")}{" "}
+                            đ */}
+                        {getPrice(sProduct.pPrice)}
+                      </span>
+                      <span className="price_after">
+                        {getDiscountPrice({
+                          pOffer: sProduct.pOffer,
+                          pPrice: sProduct.pPrice,
+                        })}
+                      </span>
+                    </>
+                  ) : (
+                    <div className="price_current">
+                      {getPrice(sProduct.pPrice)}
+                    </div>
+                  )}
                 </span>
                 <span>
                   <svg
                     onClick={(e) => isWishReq(e, sProduct._id, setWlist)}
-                    className={`${
-                      isWish(sProduct._id, wList) && "hidden"
-                    } w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700`}
+                    className={`${isWish(sProduct._id, wList) && "hidden"
+                      } w-5 h-5 md:w-6 md:h-6 cursor-pointer text-red-700`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -199,9 +219,8 @@ const ProductDetailsSection = (props) => {
                   </svg>
                   <svg
                     onClick={(e) => unWishReq(e, sProduct._id, setWlist)}
-                    className={`${
-                      !isWish(sProduct._id, wList) && "hidden"
-                    } w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700`}
+                    className={`${!isWish(sProduct._id, wList) && "hidden"
+                      } w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -225,14 +244,12 @@ const ProductDetailsSection = (props) => {
                 ""
               )}
               <div
-                className={`flex justify-between items-center px-4 py-2 border ${
-                  +quantitiy === +sProduct.pQuantity && "border-red-500"
-                }`}
+                className={`flex justify-between items-center px-4 py-2 border ${+quantitiy === +sProduct.pQuantity && "border-red-500"
+                  }`}
               >
                 <div
-                  className={`${
-                    quantitiy === sProduct.pQuantity && "text-red-500"
-                  }`}
+                  className={`${quantitiy === sProduct.pQuantity && "text-red-500"
+                    }`}
                 >
                   Quantity
                 </div>
@@ -240,8 +257,8 @@ const ProductDetailsSection = (props) => {
                 {sProduct.pQuantity !== 0 ? (
                   <Fragment>
                     {layoutData.inCart == null ||
-                    (layoutData.inCart !== null &&
-                      layoutData.inCart.includes(sProduct._id) === false) ? (
+                      (layoutData.inCart !== null &&
+                        layoutData.inCart.includes(sProduct._id) === false) ? (
                       <div className="flex items-center space-x-2">
                         <span
                           onClick={(e) =>
@@ -366,7 +383,7 @@ const ProductDetailsSection = (props) => {
               {sProduct.pQuantity !== 0 ? (
                 <Fragment>
                   {layoutData.inCart !== null &&
-                  layoutData.inCart.includes(sProduct._id) === true ? (
+                    layoutData.inCart.includes(sProduct._id) === true ? (
                     <div
                       style={{ background: "#303031" }}
                       className={`px-4 py-2 text-white text-center cursor-not-allowed uppercase opacity-75`}
@@ -397,7 +414,7 @@ const ProductDetailsSection = (props) => {
               ) : (
                 <Fragment>
                   {layoutData.inCart !== null &&
-                  layoutData.inCart.includes(sProduct._id) === true ? (
+                    layoutData.inCart.includes(sProduct._id) === true ? (
                     <div
                       style={{ background: "#303031" }}
                       className={`px-4 py-2 text-white text-center cursor-not-allowed uppercase opacity-75`}
@@ -417,7 +434,10 @@ const ProductDetailsSection = (props) => {
               )}
               {/* Incart and out of stock button End */}
             </div>
+
           </div>
+          {/* </div> */}
+          <div className="col-span-2 md:col-span-4"></div>
         </div>
       </section>
       {/* Product Details Section two */}

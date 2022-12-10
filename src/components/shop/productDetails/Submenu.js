@@ -7,14 +7,14 @@ const Submenu = (props) => {
   return (
     <Fragment>
       {/* Submenu Section */}
-      <section className="mx-4 mt-24 md:mx-12 md:mt-32 lg:mt-24">
+      <section className="mx-4 mt-4">
         <div className="flex justify-between items-center">
-          <div className="text-sm flex space-x-2">
+          <div className="text-lg flex space-x-2">
             <span
               className="hover:text-yellow-700 cursor-pointer"
               onClick={(e) => history.push("/")}
             >
-              Shop
+              Cửa hàng
             </span>
             <span
               className="hover:text-yellow-700 cursor-pointer"

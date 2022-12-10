@@ -1,11 +1,18 @@
 import React, { Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
+import InfoService from "../home/InfoService";
 import "./style.css";
 
 const Footer = (props) => {
   return (
     <Fragment>
+      <div
+        className="w-full md:mx-auto md:my-5"
+        style={{ backgroundColor: "rgb(220, 220, 220)" }}
+      >
+        <InfoService />
+      </div>
       <footer
         // style={{ background: "#303031", color: "#87898A" }}
         className=" z-10 py-6 px-4 md:px-12 text-center "
@@ -29,7 +36,7 @@ const Footer = (props) => {
           </div>
           <div className="address-box">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d421.8320718211513!2d106.67135510979381!3d10.785744392321465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f8e2f41d937%3A0xa750f1fdfbcf6750!2sLEO%20coffee%20%26%20tea!5e0!3m2!1svi!2s!4v1670320070074!5m2!1svi!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.6611225954575!2d106.82842601533444!3d10.83722446103066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175211a1d77cb9b%3A0xd8ec8eb530841276!2sVinhomes%20Grand%20Park!5e0!3m2!1svi!2s!4v1670668719838!5m2!1svi!2s"
               width="100%"
               height="200"
               style={{ border: 0 }}
@@ -48,7 +55,10 @@ const Footer = (props) => {
                 class="icon-fb icon-footer"
                 aria-label="Follow on Facebook"
               >
-                <i class="icon-facebook"></i>
+                {/* <i class="icon-facebook"></i> */}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                  <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+                </svg>
               </a>
               <a
                 href="/"
@@ -58,7 +68,10 @@ const Footer = (props) => {
                 class="icon-ins icon-footer"
                 aria-label="Follow on Instagram"
               >
-                <i class="icon-instagram"></i>
+                {/* <i class="icon-instagram"></i> */}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                </svg>
               </a>
               <a
                 href="/"
@@ -88,8 +101,8 @@ const Footer = (props) => {
             <div className="contact">
               <p>Tư vấn: 0931 255 777 | Hợp tác: 0789 355 777</p>
               <p>
-                Hẻm 237 Trần Văn Đang, Phường 11, Quận 3, Thành phố Hồ Chí Minh,
-                Việt Nam
+                Vinhomes Grand Park, Nguyễn Xiển, Long Thạnh Mỹ, Quận 9, Thành
+                phố Hồ Chí Minh
               </p>
               <p>Thời gian làm việc: Từ 8h30 - 21h30 (Hàng ngày)</p>
             </div>

@@ -64,40 +64,43 @@ const HomeComponent = () => {
   return (
     <Fragment>
       <section
-        className="container  m-4 md:mx-auto md:my-4"
+        className="container   md:mx-auto md:my-4"
         style={{ marginTop: 0 }}
       >
         <Slider />
       </section>
       {/* Category, Search & Filter Section */}
-      {/* <section className="container  m-4 md:mx-auto md:my-5">
+      {/* <section className="container   md:mx-auto md:my-5">
         <ProductCategory />
       </section> */}
       {/* Product Section */}
 
       {/* Khuyến mãi */}
-      <section className="container m-4 md:mx-auto md:my-5 ">
+      <section
+        className="container  md:mx-auto md:my-5 "
+        style={{ marginTop: "1.5rem" }}
+      >
         <Title name="Khuyến mãi" />
         <ListProduct styleShow="slide" data={promotedProducts} />
         {/* <SingleProduct /> */}
       </section>
       {/* Sản phẩm nổi bật */}
-      <section className="container m-4 md:mx-auto md:my-5">
+      <section className="container  md:mx-auto md:my-5">
         <Title name="Sản phẩm nổi bật" />
         <ListProduct styleShow="grid" data={bestProducts} />
       </section>
       {/* Thương hiệu nổi bật */}
-      <section className="container m-4 md:mx-auto md:my-5 ">
+      <section className="container  md:mx-auto md:my-5 ">
         <Title name="Thương hiệu nổi bật" />
         <Brand />
       </section>
       {/* Thông tin dịch vụ */}
-      <section
-        className="w-full m-4 md:mx-auto md:my-5"
+      {/* <section
+        className="w-full md:mx-auto md:my-5"
         style={{ backgroundColor: "rgb(220, 220, 220)" }}
       >
         <InfoService />
-      </section>
+      </section> */}
     </Fragment>
   );
 };

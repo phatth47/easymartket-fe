@@ -11,7 +11,7 @@ import { HomeContext } from ".";
 import { isWishReq, unWishReq, isWish } from "./Mixins";
 import Slider from "react-slick";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { getDiscountPrice, getPrice } from "../../common/price";
 const apiURL = process.env.REACT_APP_API_URL;
 
 const ListProduct = ({ data, styleShow }) => {
@@ -98,17 +98,24 @@ const ListProduct = ({ data, styleShow }) => {
                     <div className="price_item">
                       {item.pOffer > 0 ? (
                         <>
-                          <div className="price_before">{item.pPrice} đ</div>
+                          <div className="price_before">
+                            {/* {item.pPrice
+                              .toFixed(0)
+                              .replace(/\d(?=(\d{3})+\.)/g, "$&,")}{" "}
+                            đ */}
+                            {getPrice(item.pPrice)}
+                          </div>
                           <div className="price_after">
-                            {(
-                              (item.pPrice * (100 - item.pOffer)) /
-                              100
-                            ).toFixed(0)}{" "}
-                            đ
+                            {getDiscountPrice({
+                              pOffer: item.pOffer,
+                              pPrice: item.pPrice,
+                            })}
                           </div>
                         </>
                       ) : (
-                        <div className="price_current"> {item.pPrice} đ</div>
+                        <div className="price_current">
+                          {getPrice(item.pPrice)}
+                        </div>
                       )}
                     </div>
                     {/* WhisList Logic  */}
@@ -197,16 +204,20 @@ const ListProduct = ({ data, styleShow }) => {
                   <div className="price_item">
                     {item.pOffer > 0 ? (
                       <>
-                        <div className="price_before">{item.pPrice} đ</div>
+                        <div className="price_before">
+                          {getPrice(item.pPrice)}
+                        </div>
                         <div className="price_after">
-                          {((item.pPrice * (100 - item.pOffer)) / 100).toFixed(
-                            0
-                          )}{" "}
-                          đ
+                          {getDiscountPrice({
+                            pOffer: item.pOffer,
+                            pPrice: item.pPrice,
+                          })}
                         </div>
                       </>
                     ) : (
-                      <div className="price_current"> {item.pPrice} đ</div>
+                      <div className="price_current">
+                        {getPrice(item.pPrice)}
+                      </div>
                     )}
                   </div>
 

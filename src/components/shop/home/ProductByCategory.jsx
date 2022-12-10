@@ -17,9 +17,9 @@ const Submenu = ({ category }) => {
   return (
     <Fragment>
       {/* Submenu Section */}
-      <section className="mx-4 mb-4 mt-24 md:mx-12 md:mt-32 lg:mt-24">
+      <section className=" mb-4 mt-4 ">
         <div className="flex justify-between items-center">
-          <div className="text-sm flex space-x-3">
+          <div className="text-lg flex space-x-3">
             <span
               className="hover:text-yellow-700 cursor-pointer"
               onClick={(e) => history.push("/")}
@@ -64,6 +64,7 @@ const AllProduct = ({ products }) => {
       {/* <ProductCategoryDropdown /> */}
       {/* </section> */}
       <ListProduct styleShow="grid" data={products} />
+      <img src="/images/banner.jpg" alt="banner" />
     </Fragment>
   );
 };
@@ -90,7 +91,7 @@ const PageComponent = () => {
 
   return (
     <Fragment>
-      <div className="container">
+      <div className="container m-auto">
         <AllProduct products={products} />
       </div>
     </Fragment>
