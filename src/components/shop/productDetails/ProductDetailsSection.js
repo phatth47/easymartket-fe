@@ -39,12 +39,9 @@ const ProductDetailsSection = (props) => {
 
   const [getProductsCategory, setProductsCategory] = useState(null);
 
-
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
-
   }, [id]);
   // const fetchProductByCategory = async () => {
   //   try {
@@ -63,8 +60,12 @@ const ProductDetailsSection = (props) => {
       let responseData = await getSingleProduct(id);
       let idProductSelected = responseData.Product._id;
       // console.log("responseData", responseData)
-      let responseDataCategory = await productByCategory(responseData.Product.pCategory._id);
-      let getRecommendProducts = (responseDataCategory.Products).filter(p => p._id != idProductSelected).slice(0, 2)
+      let responseDataCategory = await productByCategory(
+        responseData.Product.pCategory._id
+      );
+      let getRecommendProducts = responseDataCategory.Products.filter(
+        (p) => p._id != idProductSelected
+      ).slice(0, 2);
       // console.log("getRecommendProducts", getRecommendProducts)
       setTimeout(() => {
         if (responseData.Product) {
@@ -141,8 +142,9 @@ const ProductDetailsSection = (props) => {
                   onClick={(e) =>
                     slideImage("increase", 0, count, setCount, pImages)
                   }
-                  className={`${count === 0 ? "" : "opacity-25"
-                    } cursor-pointer w-20 h-20 object-cover object-center`}
+                  className={`${
+                    count === 0 ? "" : "opacity-25"
+                  } cursor-pointer w-20 h-20 object-cover object-center`}
                   src={`${apiURL}/uploads/products/${sProduct.pImages[0]}`}
                   alt="pic"
                 />
@@ -150,8 +152,9 @@ const ProductDetailsSection = (props) => {
                   onClick={(e) =>
                     slideImage("increase", 1, count, setCount, pImages)
                   }
-                  className={`${count === 1 ? "" : "opacity-25"
-                    } cursor-pointer w-20 h-20 object-cover object-center`}
+                  className={`${
+                    count === 1 ? "" : "opacity-25"
+                  } cursor-pointer w-20 h-20 object-cover object-center`}
                   src={`${apiURL}/uploads/products/${sProduct.pImages[1]}`}
                   alt="pic"
                 />
@@ -203,7 +206,9 @@ const ProductDetailsSection = (props) => {
               </div>
               <div className="col-span-2 mt-8 md:mt-0 md:col-span-5 md:ml-6 lg:ml-12">
                 <div className="flex flex-col leading-8">
-                  <div className="text-2xl tracking-wider">{sProduct.pName}</div>
+                  <div className="text-2xl tracking-wider">
+                    {sProduct.pName}
+                  </div>
                   <div className="flex justify-between items-center">
                     <span className="text-xl tracking-wider">
                       {/* ${sProduct.pPrice}.00 */}
@@ -232,8 +237,9 @@ const ProductDetailsSection = (props) => {
                     <span>
                       <svg
                         onClick={(e) => isWishReq(e, sProduct._id, setWlist)}
-                        className={`${isWish(sProduct._id, wList) && "hidden"
-                          } w-5 h-5 md:w-6 md:h-6 cursor-pointer text-red-700`}
+                        className={`${
+                          isWish(sProduct._id, wList) && "hidden"
+                        } w-5 h-5 md:w-6 md:h-6 cursor-pointer text-red-700`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -248,8 +254,9 @@ const ProductDetailsSection = (props) => {
                       </svg>
                       <svg
                         onClick={(e) => unWishReq(e, sProduct._id, setWlist)}
-                        className={`${!isWish(sProduct._id, wList) && "hidden"
-                          } w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700`}
+                        className={`${
+                          !isWish(sProduct._id, wList) && "hidden"
+                        } w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
@@ -276,12 +283,14 @@ const ProductDetailsSection = (props) => {
                     ""
                   )}
                   <div
-                    className={`flex justify-between items-center px-4 py-2 border ${+quantitiy === +sProduct.pQuantity && "border-red-500"
-                      }`}
+                    className={`flex justify-between items-center px-4 py-2 border ${
+                      +quantitiy === +sProduct.pQuantity && "border-red-500"
+                    }`}
                   >
                     <div
-                      className={`${quantitiy === sProduct.pQuantity && "text-red-500"
-                        }`}
+                      className={`${
+                        quantitiy === sProduct.pQuantity && "text-red-500"
+                      }`}
                     >
                       {/* Quantity */}
                       Số lượng
@@ -290,8 +299,9 @@ const ProductDetailsSection = (props) => {
                     {sProduct.pQuantity !== 0 ? (
                       <Fragment>
                         {layoutData.inCart == null ||
-                          (layoutData.inCart !== null &&
-                            layoutData.inCart.includes(sProduct._id) === false) ? (
+                        (layoutData.inCart !== null &&
+                          layoutData.inCart.includes(sProduct._id) ===
+                            false) ? (
                           <div className="flex items-center space-x-2">
                             <span
                               onClick={(e) =>
@@ -416,7 +426,7 @@ const ProductDetailsSection = (props) => {
                   {sProduct.pQuantity !== 0 ? (
                     <Fragment>
                       {layoutData.inCart !== null &&
-                        layoutData.inCart.includes(sProduct._id) === true ? (
+                      layoutData.inCart.includes(sProduct._id) === true ? (
                         <div
                           style={{ background: "#303031" }}
                           className={`px-4 py-2 text-white text-center cursor-not-allowed uppercase opacity-75`}
@@ -449,7 +459,7 @@ const ProductDetailsSection = (props) => {
                   ) : (
                     <Fragment>
                       {layoutData.inCart !== null &&
-                        layoutData.inCart.includes(sProduct._id) === true ? (
+                      layoutData.inCart.includes(sProduct._id) === true ? (
                         <div
                           style={{ background: "#303031" }}
                           className={`px-4 py-2 text-white text-center cursor-not-allowed uppercase opacity-75`}
@@ -471,15 +481,12 @@ const ProductDetailsSection = (props) => {
                   )}
                   {/* Incart and out of stock button End */}
                 </div>
-
               </div>
               {/* </div> */}
               {/* <ProductDetailsSectionTwo /> */}
-
             </div>
 
             <ProductDetailsSectionTwo />
-
           </div>
           <div className="col-span-2 md:col-span-4 md:px-16">
             <h4 class="text-lg md:text-xl section-title section-title-normal">
@@ -490,7 +497,6 @@ const ProductDetailsSection = (props) => {
         </div>
       </section>
       {/* Product Details Section two */}
-
     </Fragment>
   );
 };

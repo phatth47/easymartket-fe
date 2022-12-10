@@ -3,7 +3,7 @@ import moment from "moment";
 
 import { OrderContext } from "./index";
 import { fetchData, editOrderReq, deleteOrderReq } from "./Actions";
-
+import { getPrice } from "../../common/price";
 const apiURL = process.env.REACT_APP_API_URL;
 
 const AllCategory = (props) => {
@@ -138,7 +138,7 @@ const CategoryTable = ({ order, editOrder }) => {
           )}
         </td>
         <td className="hover:bg-gray-200 p-2 text-center">
-          ${order.amount}.00
+          {getPrice(order.amount)}
         </td>
         <td className="hover:bg-gray-200 p-2 text-center">{order.user.name}</td>
         <td className="hover:bg-gray-200 p-2 text-center">{order.phone}</td>

@@ -5,6 +5,7 @@ import { cartListProduct } from "./FetchApi";
 import { isAuthenticate } from "../auth/fetchApi";
 import { cartList } from "../productDetails/Mixins";
 import { subTotal, quantity, totalCost } from "./Mixins";
+import { getPrice, getDiscountPrice } from "../../common/price";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -57,13 +58,15 @@ const CartModal = () => {
     <Fragment>
       {/* Black Overlay */}
       <div
-        className={`${!data.cartModal ? "hidden" : ""
-          } fixed top-0 z-30 w-full h-full bg-black opacity-50`}
+        className={`${
+          !data.cartModal ? "hidden" : ""
+        } fixed top-0 z-30 w-full h-full bg-black opacity-50`}
       />
       {/* Cart Modal Start */}
       <section
-        className={`${!data.cartModal ? "hidden" : ""
-          } fixed z-40 inset-0 flex items-start justify-end`}
+        className={`${
+          !data.cartModal ? "hidden" : ""
+        } fixed z-40 inset-0 flex items-start justify-end`}
       >
         <div
           style={{ background: "#303031" }}
@@ -125,7 +128,10 @@ const CartModal = () => {
                                 {/* Subtotoal :  */}
                                 Tổng :
                               </span>{" "}
-                              {subTotal(item._id, item.pPrice)}đ
+                              {getDiscountPrice({
+                                pPrice: subTotal(item._id, item.pPrice),
+                                pOffer: item.pOffer,
+                              })}
                             </div>{" "}
                             {/* SUbtotal Count */}
                           </div>
@@ -181,7 +187,7 @@ const CartModal = () => {
                     }}
                   >
                     {/* Checkout ${data.cartTotalCost}.00 */}
-                    Thanh toán ${data.cartTotalCost}.00
+                    Thanh toán: {getPrice(data.cartTotalCost)}
                   </div>
                 ) : (
                   <div
@@ -199,7 +205,6 @@ const CartModal = () => {
                       });
                     }}
                   >
-                    {/* Checkout ${data.cartTotalCost}.00 */}
                     Thanh toán ${data.cartTotalCost}.00
                   </div>
                 )}

@@ -188,7 +188,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>My Orders</span>
+                            <span>Đơn hàng</span>
                           </span>
                           <span
                             onClick={(e) => history.push("/user/profile")}
@@ -210,7 +210,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>My Account</span>
+                            <span>Tài khoản</span>
                           </span>
                           <span
                             onClick={(e) => history.push("/wish-list")}
@@ -232,7 +232,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>My Wishlist</span>
+                            <span>Yêu thích</span>
                           </span>
                           <span
                             onClick={(e) => history.push("/user/setting")}
@@ -260,7 +260,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>Setting</span>
+                            <span className="pl-1">Cài đặt</span>
                           </span>
                           <span
                             onClick={(e) => logout()}
@@ -282,7 +282,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>Logout</span>
+                            <span>Đăng xuất</span>
                           </span>
                         </li>
                       </Fragment>
@@ -315,7 +315,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>Admin Panel</span>
+                            <span>Quản lý</span>
                           </span>
                           <span
                             onClick={(e) => logout()}
@@ -337,7 +337,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>Logout</span>
+                            <span>Đăng xuất</span>
                           </span>
                         </li>
                       </Fragment>
@@ -418,7 +418,7 @@ const Navber = (props) => {
                 );
               })
             ) : (
-              <div className="text-xl text-center my-4">No Category</div>
+              <div className="text-xl text-center my-4">Không có danh mục</div>
             )}
           </div>
         </div>
@@ -490,7 +490,7 @@ const Navber = (props) => {
                 );
               })
             ) : (
-              <div className="text-xl text-center my-4">No Category</div>
+              <div className="text-xl text-center my-4">Không có danh mục</div>
             )}
             {/* </Switch> */}
           </div>
@@ -565,7 +565,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>My Orders</span>
+                            <span>Đơn hàng</span>
                           </span>
                           <span
                             onClick={(e) => history.push("/user/profile")}
@@ -587,7 +587,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>My Account</span>
+                            <span>Tài khoản</span>
                           </span>
                           <span
                             onClick={(e) => history.push("/wish-list")}
@@ -609,7 +609,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>My Wishlist</span>
+                            <span>Yêu thích</span>
                           </span>
                           <span
                             onClick={(e) => history.push("/user/setting")}
@@ -637,7 +637,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>Setting</span>
+                            <span className="pl-1">Cài đặt</span>
                           </span>
                           <span
                             onClick={(e) => logout()}
@@ -659,7 +659,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>Logout</span>
+                            <span>Đăng xuất</span>
                           </span>
                         </li>
                       </Fragment>
@@ -692,7 +692,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>Admin Panel</span>
+                            <span>Quản lý</span>
                           </span>
                           <span
                             onClick={(e) => logout()}
@@ -714,7 +714,7 @@ const Navber = (props) => {
                                 />
                               </svg>
                             </span>
-                            <span>Logout</span>
+                            <span>Đăng xuất</span>
                           </span>
                         </li>
                       </Fragment>
@@ -795,7 +795,7 @@ const Navber = (props) => {
                 );
               })
             ) : (
-              <div className="text-xl text-center my-4">No Category</div>
+              <div className="text-xl text-center my-4">Không có danh mục</div>
             )}
           </div>
         </div>

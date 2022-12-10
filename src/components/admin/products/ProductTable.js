@@ -4,6 +4,7 @@ import moment from "moment";
 import { ProductContext } from "./index";
 import { IcLoading } from "../../../image/ic_svg";
 import Pagination from "@mui/material/Pagination";
+import { getPrice } from "../../common/price";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -86,13 +87,16 @@ const AllProduct = (props) => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
-              <th className="px-4 py-2 border" style={{width: "15%"}}>Sản phẩm</th>
-              <th className="px-4 py-2 border">Mô tả</th>
+              <th className="px-4 py-2 border" style={{ width: "15%" }}>
+                Sản phẩm
+              </th>
+              {/* <th className="px-4 py-2 border">Mô tả</th> */}
               <th className="px-4 py-2 border">Hình ảnh</th>
               <th className="px-4 py-2 border">Trạng thái</th>
+              <th className="px-4 py-2 border">Giá bán</th>
               <th className="px-4 py-2 border">Tồn kho</th>
               <th className="px-4 py-2 border">Danh mục</th>
-              <th className="px-4 py-2 border">Khuyến mãi</th>
+              <th className="px-4 py-2 border">Khuyến mãi (%)</th>
               <th className="px-4 py-2 border">Tạo lúc</th>
               <th className="px-4 py-2 border">Chỉnh sửa/Xóa</th>
             </tr>
@@ -146,9 +150,9 @@ const ProductTable = ({ product, deleteProduct, editProduct }) => {
             ? product.pName.substring(0, 20) + "..."
             : product.pName}
         </td>
-        <td className="p-2 text-left">
+        {/* <td className="p-2 text-left">
           {product.pDescription.slice(0, 15)}...
-        </td>
+        </td> */}
         <td className="p-2 text-center">
           <img
             className="w-12 h-12 object-cover object-center"
@@ -167,6 +171,7 @@ const ProductTable = ({ product, deleteProduct, editProduct }) => {
             </span>
           )}
         </td>
+        <td className="p-2 text-center">{getPrice(product.pPrice)}</td>
         <td className="p-2 text-center">{product.pQuantity}</td>
         <td className="p-2 text-center">{product.pCategory.cName}</td>
         <td className="p-2 text-center">{product.pOffer}</td>

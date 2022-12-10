@@ -31,7 +31,7 @@ const Sidebar = (props) => {
             />
           </svg>
           <div className="flex flex-col w-full">
-            <span className="text-sm">Hello,</span>
+            <span className="text-sm">Xin chào,</span>
             <span className="text-lg">
               {data.userDetails ? data.userDetails.name : ""}
             </span>
@@ -46,7 +46,7 @@ const Sidebar = (props) => {
                 : ""
             }  px-4 py-4 hover:bg-gray-200 cursor-pointer`}
           >
-            My Orders
+            Đơn hàng
           </div>
           <hr />
           <div
@@ -57,16 +57,16 @@ const Sidebar = (props) => {
                 : ""
             }  px-4 py-4 hover:bg-gray-200 cursor-pointer`}
           >
-            My Accounts
+            Tài khoản
           </div>
-          <hr />
+          {/* <hr />
           <div
             onClick={(e) => history.push("/wish-list")}
             className={` px-4 py-4 hover:bg-gray-200 cursor-pointer`}
           >
-            My Wishlist
+            Danh sách yêu thích
           </div>
-          <hr />
+          <hr /> */}
           <div
             onClick={(e) => history.push("/user/setting")}
             className={`${
@@ -75,10 +75,10 @@ const Sidebar = (props) => {
                 : ""
             }  px-4 py-4 hover:bg-gray-200 cursor-pointer`}
           >
-            Setting
+            Đổi mật khẩu
           </div>
           <hr />
-          <div
+          {/* <div
             onClick={(e) => logout()}
             className={`${
               location.pathname === "/admin/dashboard/categories"
@@ -86,8 +86,8 @@ const Sidebar = (props) => {
                 : ""
             }  px-4 py-4 hover:bg-gray-200 cursor-pointer`}
           >
-            Logout
-          </div>
+            Đăng xuất
+          </div> */}
         </div>
       </div>
     </Fragment>

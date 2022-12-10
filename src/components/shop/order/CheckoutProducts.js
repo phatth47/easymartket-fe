@@ -6,7 +6,7 @@ import { subTotal, quantity, totalCost } from "../partials/Mixins";
 import { cartListProduct } from "../partials/FetchApi";
 import { getBrainTreeToken, getPaymentProcess } from "./FetchApi";
 import { fetchData, fetchbrainTree, pay } from "./Action";
-
+import { getPrice, getDiscountPrice } from "../../common/price";
 import DropIn from "braintree-web-drop-in-react";
 
 const apiURL = process.env.REACT_APP_API_URL;
@@ -113,6 +113,17 @@ export const CheckoutComponent = (props) => {
                       placeholder="+94"
                     />
                   </div>
+                  <div
+                    className="flex py-2 mb-2"
+                    style={{ justifyContent: "space-between" }}
+                  >
+                    <label htmlFor="phone" className="pb-2 text-xl">
+                      Tổng tiền thanh toán
+                    </label>
+                    <div className="md:ml-6 font-semibold text-gray-600 text-xl">
+                      {getPrice(totalCost())}
+                    </div>
+                  </div>
                   {/* <DropIn
                     options={{
                       authorization: state.clientToken,
@@ -186,17 +197,29 @@ const CheckoutProducts = ({ products }) => {
                     src={`${apiURL}/uploads/products/${product.pImages[0]}`}
                     alt="wishListproduct"
                   />
-                  <div className="text-lg md:ml-6 truncate">
-                    {product.pName}
-                  </div>
-                  <div className="md:ml-6 font-semibold text-gray-600 text-sm">
-                    Giá: ${product.pPrice}.00{" "}
-                  </div>
-                  <div className="md:ml-6 font-semibold text-gray-600 text-sm">
-                    SL : {quantity(product._id)}
-                  </div>
-                  <div className="font-semibold text-gray-600 text-sm">
-                    Tổng cộng : ${subTotal(product._id, product.pPrice)}.00
+                  <div className="">
+                    <div className="text-lg md:ml-6 truncate">
+                      {product.pName}
+                    </div>
+                    <div className="flex">
+                      <div className="md:ml-6 font-semibold text-gray-600 text-sm">
+                        Giá:{" "}
+                        {getDiscountPrice({
+                          pPrice: product.pPrice,
+                          pOffer: product.pOffer,
+                        })}
+                      </div>
+                      <div className="md:ml-6 font-semibold text-gray-600 text-sm">
+                        SL: {quantity(product._id)}
+                      </div>
+                      <div className="font-semibold text-gray-600 text-sm mx-8">
+                        Tổng cộng:{" "}
+                        {getDiscountPrice({
+                          pPrice: subTotal(product._id, product.pPrice),
+                          pOffer: product.pOffer,
+                        })}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
