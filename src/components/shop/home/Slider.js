@@ -12,40 +12,19 @@ const Slider = (props) => {
   const [getValueScroll, setValueScroll] = useState();
   useEffect(() => {
     sliderImages(dispatch);
-    // const mouseWheelHandler = (e) => {
-    //   const heightScreen = window.innerHeight;
-    //   const smooth = e.offsetY
-    //   setValueScroll(smooth / heightScreen * 100)
-    //   // console.log("totalScrollRef.current", e.deltaY, window.pageYOffset)
-
-    // };
-    // if (window.innerWidth > 767) {
-    //   window.addEventListener("mousewheel", mouseWheelHandler);
-
-    //   return () => {
-    //     window.removeEventListener("mousewheel", mouseWheelHandler);
-    //   };
-    // }
 
   }, []);
 
   return (
     <Fragment>
-      {/* <Parallax bgImage="http://localhost:8000/uploads/customize/1669537266833_colorful-vegetables-and-fruits-vegan-food-in-royalty-free-image-1642437193.jpeg" bgImageAlt="the vegetable" strength={800}>
-        Content goes here. Parallax height grows with content height.
-      </Parallax> */}
+
       <div className="parallax_section relative ">
         {data.sliderImages.length > 0 ? (
           <Parallax
             className="slide parallax_bg  w-full"
-            bgImage="http://localhost:8000/uploads/customize/1669537266833_colorful-vegetables-and-fruits-vegan-food-in-royalty-free-image-1642437193.jpeg"
-            // style={{
-            //   "backgroundImage": `url(${apiURL}/uploads/customize/${data.sliderImages[slide].slideImage})`,
-            // }}
-            // src={`${apiURL}/uploads/customize/${data.sliderImages[slide].slideImage}`}
+            bgImage={`${apiURL}/uploads/customize/${data.sliderImages[slide].slideImage}`}
             alt="sliderImage"
           >
-
           </Parallax>
         ) : (
           ""

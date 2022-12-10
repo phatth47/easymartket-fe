@@ -21,13 +21,6 @@ const Navber = (props) => {
       //   setStyleMenu("fixed");
       // } else setStyleMenu("");
       window.pageYOffset > 140 ? setStyleMenu("fixed") : setStyleMenu("");
-
-      console.log(
-        "totalScrollRef.current",
-        e.deltaY,
-        window.pageYOffset,
-        styleMenu
-      );
     };
     if (window.innerWidth > 0) {
       window.addEventListener("mousewheel", mouseWheelHandler);
