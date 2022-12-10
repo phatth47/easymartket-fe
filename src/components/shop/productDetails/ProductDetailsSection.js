@@ -441,6 +441,7 @@ const ProductDetailsSection = (props) => {
                               sProduct._id,
                               quantitiy,
                               sProduct.pPrice,
+                              sProduct.pOffer,
                               layoutDispatch,
                               setQuantitiy,
                               setAlertq,
