@@ -7,7 +7,7 @@ const LoginSignup = (props) => {
   const { data, dispatch } = useContext(LayoutContext);
 
   const [login, setLogin] = useState(true);
-  const [loginValue, setLoginValue] = useState("Create an account");
+  const [loginValue, setLoginValue] = useState("Đăng ký");
 
   const loginSignupModalToggle = () =>
     data.loginSignupModal
@@ -17,10 +17,10 @@ const LoginSignup = (props) => {
   const changeLoginSignup = () => {
     if (login) {
       setLogin(false);
-      setLoginValue("Login");
+      setLoginValue("Đăng nhập");
     } else {
       setLogin(true);
-      setLoginValue("Create an account");
+      setLoginValue("Đăng ký");
     }
   };
 
@@ -43,7 +43,7 @@ const LoginSignup = (props) => {
           {login ? <Login /> : <Signup />}
           <div className="flex items-center space-x-2">
             <span className="border-b border-gray-500 w-full" />
-            <span className="font-medium">or</span>
+            <span className="font-medium">hoặc</span>
             <span className="border-b border-gray-500 w-full" />
           </div>
           <div

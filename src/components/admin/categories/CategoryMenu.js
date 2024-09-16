@@ -2,9 +2,12 @@ import React, { Fragment, useContext } from "react";
 import { CategoryContext } from "./index";
 import AddCategoryModal from "./AddCategoryModal";
 import EditCategoryModal from "./EditCategoryModal";
+import DeleteCategoryModal from "./DeleteCategoryModal";
+import Snackbar from "@mui/material/Snackbar";
+import { Alert } from "../../common/alert";
 
 const CategoryMenu = (props) => {
-  const { dispatch } = useContext(CategoryContext);
+  const { data, dispatch } = useContext(CategoryContext);
 
   return (
     <Fragment>
@@ -30,11 +33,22 @@ const CategoryMenu = (props) => {
                 clipRule="evenodd"
               />
             </svg>
-            Add Category
+            Thêm danh mục
           </div>
         </div>
         <AddCategoryModal />
         <EditCategoryModal />
+        <DeleteCategoryModal />
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          open={data.snackbarState.open}
+          autoHideDuration={2000}
+          onClose={(e) => dispatch({ type: "hideSnackbar" })}
+        >
+          <Alert severity="success" sx={{ width: "100%" }}>
+            {data.snackbarState.message}
+          </Alert>
+        </Snackbar>
       </div>
     </Fragment>
   );

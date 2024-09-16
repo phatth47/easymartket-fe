@@ -24,7 +24,7 @@ export const totalCost = () => {
   let totalCost = 0;
   let carts = JSON.parse(localStorage.getItem("cart"));
   carts.forEach((item) => {
-    totalCost += item.quantitiy * item.price;
+    totalCost += (item.quantitiy * (item.price * (100 - item.discount))) / 100;
   });
   return totalCost;
 };

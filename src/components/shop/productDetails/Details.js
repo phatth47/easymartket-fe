@@ -4,7 +4,10 @@ import ProductDetailsSection from "./ProductDetailsSection";
 const Details = (props) => {
   return (
     <Fragment>
-      <ProductDetailsSection />
+      <div className="container m-auto">
+        <ProductDetailsSection />
+      </div>
+
     </Fragment>
   );
 };

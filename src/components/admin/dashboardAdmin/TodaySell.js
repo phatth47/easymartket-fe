@@ -31,17 +31,17 @@ const SellTable = () => {
     <Fragment>
       <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
         <div className="text-2xl font-semibold mb-6 text-center">
-          Today's Orders{" "}
+          Đơn hàng hôm nay {": "}
           {data.totalOrders.Orders !== undefined ? ordersList().length : 0}
         </div>
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
-              <th className="px-4 py-2 border">Products</th>
-              <th className="px-4 py-2 border">Image</th>
-              <th className="px-4 py-2 border">Status</th>
-              <th className="px-4 py-2 border">Order Address</th>
-              <th className="px-4 py-2 border">Ordered at</th>
+              <th className="px-4 py-2 border">Sản phẩm</th>
+              <th className="px-4 py-2 border">Hình ảnh</th>
+              <th className="px-4 py-2 border">Trạng thái</th>
+              <th className="px-4 py-2 border">Địa chỉ giao hàng</th>
+              <th className="px-4 py-2 border">Đặt lúc</th>
             </tr>
           </thead>
           <tbody>
@@ -55,24 +55,24 @@ const SellTable = () => {
                   colSpan="5"
                   className="text-xl text-center font-semibold py-8"
                 >
-                  No orders found today
+                  Không có đơn hàng nào hôm nay
                 </td>
               </tr>
             )}
           </tbody>
         </table>
-        <div className="text-sm text-gray-600 mt-2">
+        {/* <div className="text-sm text-gray-600 mt-2">
           Total{" "}
           {data.totalOrders.Orders !== undefined ? ordersList().length : 0}{" "}
           orders found
-        </div>
+        </div> */}
         <div className="flex justify-center">
           <span
             onClick={(e) => history.push("/admin/dashboard/orders")}
             style={{ background: "#303031" }}
             className="cursor-pointer px-4 py-2 text-white rounded-full"
           >
-            View All
+            Xem tất cả
           </span>
         </div>
       </div>

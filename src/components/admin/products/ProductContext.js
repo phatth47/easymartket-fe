@@ -13,6 +13,15 @@ export const productState = {
     pPrice: "",
     pOffer: "",
   },
+  deleteProductModal: {
+    modal: false,
+    pId: "",
+    pName: "",
+  },
+  snackbarState: {
+    open: false,
+    message: "",
+  },
 };
 
 export const productReducer = (state, action) => {
@@ -60,6 +69,42 @@ export const productReducer = (state, action) => {
           pQuantity: "",
           pPrice: "",
           pOffer: "",
+        },
+      };
+    /* Delete a Product */
+    case "deleteProductModalOpen":
+      console.log(action.product._id);
+      return {
+        ...state,
+        deleteProductModal: {
+          modal: true,
+          pId: action.product._id,
+          pName: action.product.pName,
+        },
+      };
+    case "deleteProductModalClose":
+      return {
+        ...state,
+        deleteProductModal: {
+          modal: false,
+          pId: "",
+          pName: "",
+        },
+      };
+    case "showSnackbar":
+      return {
+        ...state,
+        snackbarState: {
+          open: true,
+          message: action.message,
+        },
+      };
+    case "hideSnackbar":
+      return {
+        ...state,
+        snackbarState: {
+          open: false,
+          message: "",
         },
       };
     default:

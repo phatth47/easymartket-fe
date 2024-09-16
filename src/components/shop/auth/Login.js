@@ -3,9 +3,8 @@ import { loginReq } from "./fetchApi";
 import { LayoutContext } from "../index";
 
 const Login = (props) => {
-  const { data: layoutData, dispatch: layoutDispatch } = useContext(
-    LayoutContext
-  );
+  const { data: layoutData, dispatch: layoutDispatch } =
+    useContext(LayoutContext);
 
   const [data, setData] = useState({
     email: "",
@@ -42,10 +41,12 @@ const Login = (props) => {
 
   return (
     <Fragment>
-      <div className="text-center text-2xl mb-6">Login</div>
+      <div className="text-center text-2xl mb-6">Đăng nhập</div>
       {layoutData.loginSignupError ? (
         <div className="bg-red-200 py-2 px-4 rounded">
-          You need to login for checkout. Haven't accont? Create new one.
+          {/* You need to login for checkout. Haven't accont? Create new one. */}
+          Bạn cần phải đăng nhập để mua hàng. Nếu chưa có tài khoản, hãy tạo tài
+          khoản mới.
         </div>
       ) : (
         ""
@@ -53,7 +54,7 @@ const Login = (props) => {
       <form className="space-y-4">
         <div className="flex flex-col">
           <label htmlFor="name">
-            Username or email address
+            Địa chỉ Email
             <span className="text-sm text-gray-600 ml-1">*</span>
           </label>
           <input
@@ -72,7 +73,7 @@ const Login = (props) => {
         </div>
         <div className="flex flex-col">
           <label htmlFor="password">
-            Password<span className="text-sm text-gray-600 ml-1">*</span>
+            Mật khẩu<span className="text-sm text-gray-600 ml-1">*</span>
           </label>
           <input
             onChange={(e) => {
@@ -96,11 +97,11 @@ const Login = (props) => {
               className="px-4 py-2 focus:outline-none border mr-1"
             />
             <label htmlFor="rememberMe">
-              Remember me<span className="text-sm text-gray-600">*</span>
+              Ghi nhớ đăng nhập<span className="text-sm text-gray-600">*</span>
             </label>
           </div>
           <a className="block text-gray-600" href="/">
-            Lost your password?
+            Quên mật khẩu?
           </a>
         </div>
         <div
@@ -108,7 +109,7 @@ const Login = (props) => {
           style={{ background: "#303031" }}
           className="font-medium px-4 py-2 text-white text-center cursor-pointer"
         >
-          Login
+          Đăng nhập
         </div>
       </form>
     </Fragment>

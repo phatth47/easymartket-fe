@@ -2,6 +2,9 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { getAllProduct, deleteProduct } from "./FetchApi";
 import moment from "moment";
 import { ProductContext } from "./index";
+import { IcLoading } from "../../../image/ic_svg";
+import Pagination from "@mui/material/Pagination";
+import { getPrice } from "../../common/price";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -27,17 +30,24 @@ const AllProduct = (props) => {
         });
         setLoading(false);
       }
-    }, 1000);
+    }, 500);
   };
 
-  const deleteProductReq = async (pId) => {
-    let deleteC = await deleteProduct(pId);
-    if (deleteC.error) {
-      console.log(deleteC.error);
-    } else if (deleteC.success) {
-      console.log(deleteC.success);
-      fetchData();
-    }
+  // const deleteProductReq = async (pId) => {
+  //   let deleteC = await deleteProduct(pId);
+  //   if (deleteC.error) {
+  //     console.log(deleteC.error);
+  //   } else if (deleteC.success) {
+  //     console.log(deleteC.success);
+  //     fetchData();
+  //   }
+  // };
+
+  const deleteProduct = (product) => {
+    dispatch({
+      type: "deleteProductModalOpen",
+      product: { ...product },
+    });
   };
 
   /* This method call the editmodal & dispatch product context */
@@ -50,26 +60,26 @@ const AllProduct = (props) => {
     }
   };
 
+  /* This method paginite */
+  const [page, setPage] = useState(1);
+
+  const onChangePage = (e, page) => {
+    setPage(page);
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
-        <svg
-          className="w-12 h-12 animate-spin text-gray-600"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-          ></path>
-        </svg>
+        <IcLoading className="w-12 h-12 animate-spin text-gray-600"></IcLoading>
       </div>
     );
   }
+  const productsPerPage = 10;
+  const totalProducts = (products && products.length) || 0;
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+  const start = (page - 1) * productsPerPage;
+  const end = start + productsPerPage;
+  const renderProducts = (products && products.slice(start, end)) || [];
 
   return (
     <Fragment>
@@ -77,28 +87,30 @@ const AllProduct = (props) => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
-              <th className="px-4 py-2 border">Product</th>
-              <th className="px-4 py-2 border">Description</th>
-              <th className="px-4 py-2 border">Image</th>
-              <th className="px-4 py-2 border">Status</th>
-              <th className="px-4 py-2 border">Stock</th>
-              <th className="px-4 py-2 border">Category</th>
-              <th className="px-4 py-2 border">Offer</th>
-              <th className="px-4 py-2 border">Created at</th>
-              <th className="px-4 py-2 border">Updated at</th>
-              <th className="px-4 py-2 border">Actions</th>
+              <th className="px-4 py-2 border" style={{ width: "15%" }}>
+                Sản phẩm
+              </th>
+              {/* <th className="px-4 py-2 border">Mô tả</th> */}
+              <th className="px-4 py-2 border">Hình ảnh</th>
+              <th className="px-4 py-2 border">Trạng thái</th>
+              <th className="px-4 py-2 border">Giá bán</th>
+              <th className="px-4 py-2 border">Tồn kho</th>
+              <th className="px-4 py-2 border">Danh mục</th>
+              <th className="px-4 py-2 border">Khuyến mãi (%)</th>
+              <th className="px-4 py-2 border">Tạo lúc</th>
+              <th className="px-4 py-2 border">Chỉnh sửa/Xóa</th>
             </tr>
           </thead>
           <tbody>
-            {products && products.length > 0 ? (
-              products.map((item, key) => {
+            {renderProducts && renderProducts.length > 0 ? (
+              renderProducts.map((item, key) => {
                 return (
                   <ProductTable
                     product={item}
                     editProduct={(pId, product, type) =>
                       editProduct(pId, product, type)
                     }
-                    deleteProduct={(pId) => deleteProductReq(pId)}
+                    deleteProduct={(product) => deleteProduct(product)}
                     key={key}
                   />
                 );
@@ -115,9 +127,14 @@ const AllProduct = (props) => {
             )}
           </tbody>
         </table>
-        <div className="text-sm text-gray-600 mt-2">
-          Total {products && products.length} product found
-        </div>
+      </div>
+      <div className="col-span-1 flex items-center justify-center pt-8">
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={onChangePage}
+          shape="rounded"
+        />
       </div>
     </Fragment>
   );
@@ -129,13 +146,13 @@ const ProductTable = ({ product, deleteProduct, editProduct }) => {
     <Fragment>
       <tr>
         <td className="p-2 text-left">
-          {product.pName.length > 15
-            ? product.pDescription.substring(1, 15) + "..."
+          {product.pName.length > 30
+            ? product.pName.substring(0, 20) + "..."
             : product.pName}
         </td>
-        <td className="p-2 text-left">
+        {/* <td className="p-2 text-left">
           {product.pDescription.slice(0, 15)}...
-        </td>
+        </td> */}
         <td className="p-2 text-center">
           <img
             className="w-12 h-12 object-cover object-center"
@@ -154,14 +171,12 @@ const ProductTable = ({ product, deleteProduct, editProduct }) => {
             </span>
           )}
         </td>
+        <td className="p-2 text-center">{getPrice(product.pPrice)}</td>
         <td className="p-2 text-center">{product.pQuantity}</td>
         <td className="p-2 text-center">{product.pCategory.cName}</td>
         <td className="p-2 text-center">{product.pOffer}</td>
         <td className="p-2 text-center">
           {moment(product.createdAt).format("lll")}
-        </td>
-        <td className="p-2 text-center">
-          {moment(product.updatedAt).format("lll")}
         </td>
         <td className="p-2 flex items-center justify-center">
           <span
@@ -183,7 +198,7 @@ const ProductTable = ({ product, deleteProduct, editProduct }) => {
             </svg>
           </span>
           <span
-            onClick={(e) => deleteProduct(product._id)}
+            onClick={(e) => deleteProduct(product)}
             className="cursor-pointer hover:bg-gray-200 rounded-lg p-2 mx-1"
           >
             <svg
